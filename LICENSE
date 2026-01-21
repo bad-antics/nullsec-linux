@@ -1,0 +1,90 @@
+NullSec Linux License Agreement
+Version 1.0 - January 2026
+
+Copyright (c) 2026 NullSec Linux Project
+All Rights Reserved.
+
+================================================================================
+                         NULLSEC LINUX PUBLIC LICENSE
+================================================================================
+
+1. DEFINITIONS
+
+"Software" refers to NullSec Linux and all associated tools, utilities, 
+documentation, and source code distributed under this license.
+
+"Author" refers to the NullSec Linux Project and its contributors.
+
+"User" refers to any individual or organization using the Software.
+
+2. GRANT OF LICENSE
+
+Subject to the terms of this license, the Author grants you a non-exclusive,
+worldwide, royalty-free license to:
+
+  a) Use the Software for personal, educational, and commercial purposes
+  b) Modify the Software for your own use
+  c) Distribute copies of the Software
+  d) Distribute modified versions of the Software
+
+3. CONDITIONS
+
+The above rights are granted provided that:
+
+  a) All copies include this license and copyright notice
+  b) Modified versions are clearly marked as such
+  c) Credit is given to the original NullSec Linux Project
+  d) The Software is not used for malicious purposes against unwilling targets
+  e) The Software is not sold without significant added value
+
+4. SECURITY TOOLS DISCLAIMER
+
+NullSec Linux contains security and penetration testing tools. By using this
+Software, you agree to:
+
+  a) Use these tools only on systems you own or have explicit permission to test
+  b) Comply with all applicable laws and regulations
+  c) Accept full responsibility for your actions
+  d) Not use these tools for unauthorized access or illegal activities
+
+5. WARRANTY DISCLAIMER
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+6. LIMITATION OF LIABILITY
+
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT,
+OR CONSEQUENTIAL DAMAGES WHATSOEVER ARISING OUT OF OR IN CONNECTION WITH THE
+USE OF OR INABILITY TO USE THE SOFTWARE.
+
+7. TERMINATION
+
+This license automatically terminates if you fail to comply with its terms.
+Upon termination, you must destroy all copies of the Software in your possession.
+
+8. GOVERNING LAW
+
+This license shall be governed by and construed in accordance with applicable
+international copyright laws.
+
+================================================================================
+                              SIGNATURE VERIFICATION
+================================================================================
+
+All official NullSec Linux releases are signed with GPG key:
+Key ID: NULLSEC-2026
+Fingerprint: [Generated at build time]
+
+Verify releases at: https://github.com/nullsec-linux/releases
+
+================================================================================
+
+For questions or licensing inquiries: nullsec@proton.me
+
+NullSec Linux - Security Through Transparency

@@ -1,0 +1,21 @@
+# Secrets
+*.key
+*.pem
+.env
+.secrets
+*.enc.key
+
+# Build
+build/
+dist/
+*.o
+*.exe.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
