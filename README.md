@@ -168,7 +168,7 @@ NullSec Public License v1.0 - For authorized security testing only.
 
 *NullSec Project © 2025 - Hack Ethically*
 
-[![Twitter](https://img.shields.io/badge/Twitter-bad-antics-1DA1F2?style=flat&logo=twitter&logoColor=white)](https://twitter.com/bad-antics)
+[![GitHub](https://img.shields.io/badge/GitHub-bad--antics-181717?style=flat&logo=github&logoColor=white)](https://github.com/bad-antics)
 [![Discord](https://img.shields.io/badge/Discord-killers-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/killers)
 
 </div>
