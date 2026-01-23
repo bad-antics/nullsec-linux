@@ -2,7 +2,7 @@
 
 # �� NullSec Linux
 
-### Security-Focused Linux Distribution with Maximum Hardening
+### Security-Focused Linux Distribution with Battle-Tested Security
 
 **by bad-antics development**
 
@@ -35,19 +35,19 @@
 
 ---
 
-## 💎 Premium Editions (Hardened)
+## 💎 Premium Editions
 
-Stripped, hardened, production-ready images with maximum security features.
+Stripped, locked-down, production-ready images with enterprise-grade security.
 
 | Edition | Description | Size | Download |
 |---------|-------------|------|----------|
-| **NullSec Pro — Full** | Complete hardened system | 3.4 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-pro-4.0-amd64.iso) |
+| **NullSec Pro — Full** | Complete secure system | 3.4 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-pro-4.0-amd64.iso) |
 | **NullSec Pro — USB** | Bootable USB with encrypted persistence | 4.3 GB | [IMG](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-pro-usb-4.0-amd64.img) |
 | **NullSec Pro — Minimal** | CLI-only, minimal attack surface | 920 MB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-pro-minimal-4.0-amd64.iso) |
 | **NullSec Pro — Cloud** | AWS/GCP/Azure optimized | 1.8 GB | [AMI/VMDK](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-pro-cloud-4.0.tar.gz) |
 
 ### Premium Features:
-- ✅ Kernel hardening (KSPP, grsecurity principles)
+- ✅ Kernel lockdown (KSPP, grsecurity principles)
 - ✅ Zero telemetry — completely stripped
 - ✅ Full disk encryption (LUKS2 + Argon2id)
 - ✅ Secure boot with custom keys
@@ -109,9 +109,9 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 
 ---
 
-## 🛡️ Security Hardening
+## 🛡️ Security Features
 
-### Kernel Hardening
+### Kernel Protection
 - KASLR enabled
 - SMEP/SMAP enabled
 - PTI (Meltdown mitigation)
@@ -120,7 +120,7 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 - Lockdown mode (integrity)
 - KFENCE memory safety
 
-### Binary Hardening
+### Binary Protection
 - PIE (Position Independent Executables)
 - Full RELRO
 - Stack canaries
@@ -129,7 +129,7 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 - CET (Control-flow Enforcement)
 - Shadow stack
 
-### Network Hardening
+### Network Security
 - nftables firewall default
 - IPv6 privacy extensions
 - SYN cookies enabled
@@ -137,7 +137,7 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 - TCP timestamps disabled
 - ICMP redirect disabled
 
-### Application Hardening
+### Application Security
 - AppArmor profiles
 - Seccomp-bpf filters
 - Namespace isolation
@@ -262,7 +262,7 @@ nullsec-fetch
 # Launch framework
 nullsec-framework
 
-# Apply hardening profile
+# Apply security profile
 nullsec-harden --profile maximum
 
 # Start anonymity mode
@@ -284,7 +284,7 @@ nullsec-anon --tor --mac-spoof
 └── docs/          # Documentation
 
 /etc/nullsec/
-├── hardening/     # Hardening profiles
+├── hardening/     # Security profiles
 ├── firewall/      # nftables rules
 ├── apparmor/      # AppArmor profiles
 ├── seccomp/       # Seccomp filters
@@ -354,7 +354,7 @@ NullSec Public License v1.0 — For authorized security testing and education on
 `linux distribution` `security distro` `penetration testing` `ethical hacking` 
 `kali alternative` `parrot alternative` `red team` `blue team` `CTF` 
 `cybersecurity` `hacking tools` `privacy` `anonymity` `DFIR` `OSINT`
-`bad-antics` `nullsec` `security research` `hardened linux` `security hardening`
+`bad-antics` `nullsec` `security research` `secure linux` `security focused`
 
 ---
 
