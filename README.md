@@ -9,7 +9,7 @@
 [![License: NPL](https://img.shields.io/badge/License-NullSec%20Public-red.svg)](LICENSE)
 [![Base](https://img.shields.io/badge/Base-Debian%2013-blue.svg)]()
 [![Tools](https://img.shields.io/badge/Security%20Tools-90+-green.svg)]()
-[![Hardened](https://img.shields.io/badge/Security-Maximum%20Hardening-gold.svg)]()
+[![Secure](https://img.shields.io/badge/Security-Maximum%20Security-gold.svg)]()
 [![Version](https://img.shields.io/badge/Version-4.0-purple.svg)]()
 [![GitHub](https://img.shields.io/badge/GitHub-bad--antics-black?logo=github)](https://github.com/bad-antics)
 
@@ -284,7 +284,7 @@ nullsec-anon --tor --mac-spoof
 └── docs/          # Documentation
 
 /etc/nullsec/
-├── hardening/     # Security profiles
+├── Security/     # Security profiles
 ├── firewall/      # nftables rules
 ├── apparmor/      # AppArmor profiles
 ├── seccomp/       # Seccomp filters
