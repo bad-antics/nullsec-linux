@@ -1,0 +1,104 @@
+name: Build NullSec Linux ISO
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      edition:
+        description: 'Edition to build'
+        required: true
+        default: 'standard'
+        type: choice
+        options:
+          - standard
+          - minimal
+          - cloud
+          - aiml
+          - hardware
+          - automotive
+          - forensics
+          - all
+      architecture:
+        description: 'Architecture'
+        required: true
+        default: 'amd64'
+        type: choice
+        options:
+          - amd64
+          - arm64
+          - all
+
+env:
+  BUILD_VERSION: "5.0.0"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        edition: ${{ github.event.inputs.edition == 'all' && fromJson('["standard", "minimal", "cloud", "aiml", "hardware", "automotive", "forensics"]') || fromJson(format('["{0}"]', github.event.inputs.edition || 'standard')) }}
+        arch: ${{ github.event.inputs.architecture == 'all' && fromJson('["amd64", "arm64"]') || fromJson(format('["{0}"]', github.event.inputs.architecture || 'amd64')) }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            live-build \
+            debootstrap \
+            squashfs-tools \
+            xorriso \
+            isolinux \
+            syslinux-efi \
+            grub-pc-bin \
+            grub-efi-amd64-bin \
+            mtools \
+            dosfstools
+
+      - name: Build ISO
+        run: |
+          chmod +x build/build-iso.sh
+          sudo ./build/build-iso.sh ${{ matrix.edition }} ${{ matrix.arch }}
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nullsec-${{ matrix.edition }}-${{ env.BUILD_VERSION }}-${{ matrix.arch }}
+          path: output/*.iso
+          retention-days: 30
+
+      - name: Upload checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: checksums-${{ matrix.edition }}-${{ matrix.arch }}
+          path: |
+            output/*.sha256
+            output/*.md5
+          retention-days: 30
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            **/*.iso
+            **/*.sha256
+            **/*.md5
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

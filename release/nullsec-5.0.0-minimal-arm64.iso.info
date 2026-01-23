@@ -1,0 +1,6 @@
+NullSec Linux 5.0.0
+Edition: minimal
+Architecture: arm64
+Build Date: 2026-01-23T19:12:20Z
+This is a placeholder for the actual ISO image.
+Build with: ./build/build-iso.sh --edition minimal --arch arm64

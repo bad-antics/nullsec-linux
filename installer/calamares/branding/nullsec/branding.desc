@@ -1,0 +1,31 @@
+---
+componentName: nullsec
+
+strings:
+    productName:         "NullSec Linux"
+    shortProductName:    "NullSec"
+    version:             "5.0.0"
+    shortVersion:        "5.0"
+    versionedName:       "NullSec Linux 5.0"
+    shortVersionedName:  "NullSec 5.0"
+    bootloaderEntryName: "NullSec"
+    productUrl:          "https://bad-antics.github.io"
+    supportUrl:          "https://github.com/bad-antics/nullsec-linux/issues"
+    knownIssuesUrl:      "https://github.com/bad-antics/nullsec-linux/issues"
+    releaseNotesUrl:     "https://github.com/bad-antics/nullsec-linux/releases"
+    donateUrl:           "https://github.com/sponsors/bad-antics"
+
+images:
+    productLogo:         "logo.png"
+    productIcon:         "icon.png"
+    productWelcome:      "welcome.png"
+    productWallpaper:    "wallpaper.png"
+
+slideshow:               "show.qml"
+slideshowAPI: 2
+
+style:
+    sidebarBackground:   "#1a1a2e"
+    sidebarText:         "#00ff41"
+    sidebarTextSelect:   "#ffffff"
+    sidebarTextHighlight: "#00ff41"

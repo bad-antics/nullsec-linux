@@ -1,0 +1,17 @@
+# NullSec Linux 5.0.0 MD5 Checksums
+ddb3572e79fc360db59851d4d4964d0f  nullsec-5.0.0-standard-amd64.iso
+54c2ff70c2424c4e4525aa1e00bca3b4  nullsec-5.0.0-standard-arm64.iso
+59eb000e8d3a0803230881cc9b322a9d  nullsec-5.0.0-minimal-amd64.iso
+1355603d5b4ab4ac8fb5833403d92dbe  nullsec-5.0.0-minimal-arm64.iso
+3554566b493cb4ab71745ceb8dbe3f68  nullsec-5.0.0-live-amd64.iso
+8e3c7b0197f0f268408abd6452d90fe6  nullsec-5.0.0-live-arm64.iso
+82f81eff59bcc9170f3b95da6a405a2d  nullsec-5.0.0-cloud-amd64.iso
+8cd7158230f57670d605f81abdd21a3a  nullsec-5.0.0-cloud-arm64.iso
+0152e5fdfa5bd717b8ed6e98ff765d86  nullsec-5.0.0-aiml-amd64.iso
+7d76eb8f2f8a5517d59bb08ef0381328  nullsec-5.0.0-aiml-arm64.iso
+5b169add9cd8507e3afe0774d21d9d1d  nullsec-5.0.0-hardware-amd64.iso
+4cf8ae23e9baffa72a4738e9e6f1ad48  nullsec-5.0.0-hardware-arm64.iso
+21bd1d45e5aff62d42ad6432cd6f1a63  nullsec-5.0.0-automotive-amd64.iso
+1928e54d01340121fb1100a59829d147  nullsec-5.0.0-mobile-amd64.iso
+d82953e37b0f162eaddd48771e305f5b  nullsec-5.0.0-mobile-arm64.iso
+9bf7742e3b644b309d30a2ea9e386501  nullsec-5.0.0-forensics-amd64.iso

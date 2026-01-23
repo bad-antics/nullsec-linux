@@ -1,0 +1,6 @@
+NullSec Linux 5.0.0
+Edition: standard
+Architecture: amd64
+Build Date: 2026-01-23T19:12:20Z
+This is a placeholder for the actual ISO image.
+Build with: ./build/build-iso.sh --edition standard --arch amd64
