@@ -42,3 +42,9 @@ When responding to reviewer questions, emphasize:
 ---
 
 *Last Updated: January 23, 2026*
+
+## DistroWatch Submission
+✅ **Email Sent:** January 23, 2026
+- **To:** distro@distrowatch.com
+- **Subject:** New Distribution Submission: NullSec Linux 5.0.0
+- **Expected Response:** 2-4 weeks

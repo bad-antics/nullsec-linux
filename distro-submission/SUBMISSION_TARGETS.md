@@ -4,7 +4,7 @@
 
 ### 1. DistroWatch
 - **URL:** https://distrowatch.com/dwres.php?resource=submit
-- **Status:** 🟡 Pending
+- **Status:** ✅ Submitted
 - **Requirements:**
   - [x] Publicly available ISO
   - [x] Website/homepage
@@ -15,7 +15,7 @@
 
 ### 2. Wikipedia - Linux Distributions
 - **URL:** https://en.wikipedia.org/wiki/Comparison_of_Linux_distributions
-- **Status:** 🟡 Pending  
+- **Status:** ✅ Submitted  
 - **Requirements:**
   - [ ] Notable coverage (DistroWatch listing helps)
   - [ ] Third-party references
@@ -24,7 +24,7 @@
 
 ### 3. LinuxTracker
 - **URL:** https://linuxtracker.org
-- **Status:** 🟡 Pending
+- **Status:** ✅ Submitted
 - **Requirements:**
   - [x] Torrent file for ISO
   - [x] Checksums
@@ -43,7 +43,7 @@
 
 ### 5. AlternativeTo
 - **URL:** https://alternativeto.net
-- **Status:** 🟡 Pending
+- **Status:** ✅ Submitted
 - **Notes:** List as alternative to Kali Linux, Parrot OS.
 
 ### 6. GitHub Topics
@@ -56,12 +56,12 @@ Target lists for PR submissions:
 
 | List | URL | Status |
 |------|-----|--------|
-| awesome-security | github.com/sbilly/awesome-security | 🟡 Pending |
-| awesome-hacking | github.com/carpedm20/awesome-hacking | 🟡 Pending |
-| awesome-pentest | github.com/enaqx/awesome-pentest | 🟡 Pending |
-| awesome-linux | github.com/inputsh/awesome-linux | 🟡 Pending |
-| Awesome-Linux-Software | github.com/luong-komorebi/Awesome-Linux-Software | 🟡 Pending |
-| awesome-selfhosted | github.com/awesome-selfhosted/awesome-selfhosted | 🟡 Pending |
+| awesome-security | github.com/sbilly/awesome-security | ✅ Submitted |
+| awesome-hacking | github.com/carpedm20/awesome-hacking | ✅ Submitted |
+| awesome-pentest | github.com/enaqx/awesome-pentest | ✅ Submitted |
+| awesome-linux | github.com/inputsh/awesome-linux | ✅ Submitted |
+| Awesome-Linux-Software | github.com/luong-komorebi/Awesome-Linux-Software | ✅ Submitted |
+| awesome-selfhosted | github.com/awesome-selfhosted/awesome-selfhosted | ✅ Submitted |
 
 ### 8. Reddit Communities
 - r/linux - Release announcement
