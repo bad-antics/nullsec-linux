@@ -1,17 +1,17 @@
 <div align="center">
 
-# �� NullSec Linux
+# 🔒 NullSec Linux
 
-### Security-Focused Linux Distribution with Battle-Tested Security
+### Security-Focused Linux Distribution v5.0
 
 **by bad-antics development**
 
-[![License: NPL](https://img.shields.io/badge/License-NullSec%20Public-red.svg)](LICENSE)
-[![Base](https://img.shields.io/badge/Base-Debian%2013-blue.svg)]()
-[![Tools](https://img.shields.io/badge/Security%20Tools-90+-green.svg)]()
-[![Secure](https://img.shields.io/badge/Security-Maximum%20Security-gold.svg)]()
-[![Version](https://img.shields.io/badge/Version-4.0-purple.svg)]()
-[![GitHub](https://img.shields.io/badge/GitHub-bad--antics-black?logo=github)](https://github.com/bad-antics)
+[![License: NPL](https://img.shields.io/badge/License-NullSec%20Public-red.svg?style=for-the-badge)](LICENSE)
+[![Base](https://img.shields.io/badge/Base-Debian%2013-blue.svg?style=for-the-badge)]()
+[![Tools](https://img.shields.io/badge/Security%20Tools-115+-green.svg?style=for-the-badge)]()
+[![Version](https://img.shields.io/badge/Version-5.0-purple.svg?style=for-the-badge)]()
+[![GitHub](https://img.shields.io/badge/GitHub-bad--antics-181717?style=for-the-badge&logo=github)](https://github.com/bad-antics)
+[![Discord](https://img.shields.io/badge/Discord-killers-5865F2?style=for-the-badge&logo=discord)](https://discord.gg/killers)
 
 ```
     _   __      ____  _____              __    _                  
@@ -20,12 +20,26 @@
  / /|  / /_/ / / /  ___/ /  __/ /__   / /___/ / / / / /_/ />  <  
 /_/ |_/\__,_/_/_/  /____/\___/\___/  /_____/_/_/ /_/\__,_/_/|_|  
                                                                   
-       [ bad-antics development | Security Distribution v4.0 ]
+       [ bad-antics development | Security Distribution v5.0 ]
 ```
 
 ### 🔑 **[Join discord.gg/killers](https://discord.gg/killers)** for premium tools & support!
 
 </div>
+
+---
+
+## 🆕 What's New in v5.0
+
+- **115+ Security Tools** — 25 new tools added
+- **NullKia v3.0 Integrated** — Mobile security framework built-in
+- **AI/ML Security Suite** — LLM red teaming, ML model analysis
+- **Cloud Pentesting Edition** — AWS/GCP/Azure/Kubernetes tools
+- **Hardware Hacking Edition** — SDR, RFID, embedded systems
+- **Automotive Security** — CAN bus, OBD-II, vehicle pentesting
+- **Kernel 6.8 LTS** — Latest security patches
+- **Wayland + Hyprland** — Modern compositor option
+- **ARM64 Native** — Full Apple Silicon & Raspberry Pi 5 support
 
 ---
 
@@ -41,10 +55,11 @@ Stripped, locked-down, production-ready images with enterprise-grade security.
 
 | Edition | Description | Size | Download |
 |---------|-------------|------|----------|
-| **NullSec Pro — Full** | Complete secure system | 3.4 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-pro-4.0-amd64.iso) |
-| **NullSec Pro — USB** | Bootable USB with encrypted persistence | 4.3 GB | [IMG](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-pro-usb-4.0-amd64.img) |
-| **NullSec Pro — Minimal** | CLI-only, minimal attack surface | 920 MB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-pro-minimal-4.0-amd64.iso) |
-| **NullSec Pro — Cloud** | AWS/GCP/Azure optimized | 1.8 GB | [AMI/VMDK](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-pro-cloud-4.0.tar.gz) |
+| **NullSec Pro — Full** | Complete secure system | 3.6 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-pro-5.0-amd64.iso) |
+| **NullSec Pro — USB** | Bootable USB with encrypted persistence | 4.5 GB | [IMG](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-pro-usb-5.0-amd64.img) |
+| **NullSec Pro — Minimal** | CLI-only, minimal attack surface | 980 MB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-pro-minimal-5.0-amd64.iso) |
+| **NullSec Pro — Cloud** | AWS/GCP/Azure/K8s optimized | 2.0 GB | [OVA/AMI](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-pro-cloud-5.0.tar.gz) |
+| **NullSec Pro — Hardware** | SDR/RFID/Embedded tools | 4.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-pro-hardware-5.0-amd64.iso) |
 
 ### Premium Features:
 - ✅ Kernel lockdown (KSPP, grsecurity principles)
@@ -53,8 +68,8 @@ Stripped, locked-down, production-ready images with enterprise-grade security.
 - ✅ Secure boot with custom keys
 - ✅ Anti-forensics capabilities
 - ✅ MAC spoofing on boot
-- ✅ Tor/I2P integration
-- ✅ 90+ security tools pre-installed
+- ✅ Tor/I2P/Lokinet integration
+- ✅ 115+ security tools pre-installed
 
 ---
 
@@ -62,9 +77,9 @@ Stripped, locked-down, production-ready images with enterprise-grade security.
 
 | Edition | Description | Size | Download |
 |---------|-------------|------|----------|
-| **Full** | Complete toolkit (90+ tools) | 5.2 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-full-4.0-amd64.iso) |
-| **Lite** | Essential tools only | 2.6 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-lite-4.0-amd64.iso) |
-| **NetInstall** | Minimal, downloads during install | 480 MB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-netinst-4.0-amd64.iso) |
+| **Full** | Complete toolkit (115+ tools) | 5.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-full-5.0-amd64.iso) |
+| **Lite** | Essential tools only | 2.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-lite-5.0-amd64.iso) |
+| **NetInstall** | Minimal, downloads during install | 520 MB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-netinst-5.0-amd64.iso) |
 
 ---
 
@@ -74,10 +89,22 @@ Boot directly without installation — leaves no trace on host system.
 
 | Edition | Description | Size | Download |
 |---------|-------------|------|----------|
-| **Live Standard** | Full toolkit in RAM | 3.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-live-4.0-amd64.iso) |
-| **Live Stealth** | Anti-forensics, RAM-only | 3.0 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-live-stealth-4.0-amd64.iso) |
-| **Live Forensics** | DFIR focused, read-only mounts | 4.5 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-live-forensics-4.0-amd64.iso) |
-| **Live Air-Gapped** | No network stack, offline only | 2.2 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-live-airgap-4.0-amd64.iso) |
+| **Live Standard** | Full toolkit in RAM | 4.0 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-live-5.0-amd64.iso) |
+| **Live Stealth** | Anti-forensics, RAM-only | 3.2 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-live-stealth-5.0-amd64.iso) |
+| **Live Forensics** | DFIR focused, read-only mounts | 4.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-live-forensics-5.0-amd64.iso) |
+| **Live Air-Gapped** | No network stack, offline only | 2.4 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-live-airgap-5.0-amd64.iso) |
+
+---
+
+## 🎯 Specialized Editions (NEW in v5.0)
+
+| Edition | Description | Size | Download |
+|---------|-------------|------|----------|
+| **Cloud Pentest** | AWS/GCP/Azure/K8s security | 3.5 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-cloud-5.0-amd64.iso) |
+| **Hardware Hacking** | SDR/RFID/Embedded/IoT | 4.2 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-hardware-5.0-amd64.iso) |
+| **AI/ML Security** | LLM red team, model analysis | 6.5 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-ai-5.0-amd64.iso) |
+| **Automotive** | CAN bus, OBD-II, vehicle sec | 3.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-auto-5.0-amd64.iso) |
+| **Mobile Security** | NullKia + Android/iOS tools | 4.0 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-mobile-5.0-amd64.iso) |
 
 ---
 
@@ -86,9 +113,9 @@ Boot directly without installation — leaves no trace on host system.
 | Architecture | Description | Download |
 |--------------|-------------|----------|
 | **AMD64/x86_64** | Standard 64-bit PCs | All editions above |
-| **ARM64/aarch64** | Raspberry Pi 4/5, ARM servers | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-4.0-arm64.iso) |
-| **RISC-V** | StarFive VisionFive 2 | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-4.0-riscv64.iso) |
-| **Apple Silicon** | M1/M2/M3 via Asahi | [IMG](https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/nullsec-4.0-asahi.img) |
+| **ARM64/aarch64** | Raspberry Pi 4/5, ARM servers | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-5.0-arm64.iso) |
+| **RISC-V** | StarFive VisionFive 2 | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-5.0-riscv64.iso) |
+| **Apple Silicon** | M1/M2/M3/M4 native | [IMG](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-5.0-asahi.img) |
 
 ---
 
@@ -96,11 +123,11 @@ Boot directly without installation — leaves no trace on host system.
 
 ```bash
 # Download checksums
-wget https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/SHA256SUMS
-wget https://github.com/bad-antics/nullsec-linux/releases/download/v4.0/SHA256SUMS.sig
+wget https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/SHA256SUMS
+wget https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/SHA256SUMS.sig
 
 # Verify checksum
-sha256sum -c SHA256SUMS 2>/dev/null | grep nullsec-pro
+sha256sum -c SHA256SUMS 2>/dev/null | grep nullsec
 
 # GPG verification
 gpg --keyserver keyserver.ubuntu.com --recv-keys B1F1881F70FB62A7
@@ -112,44 +139,42 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 ## 🛡️ Security Features
 
 ### Kernel Protection
-- KASLR enabled
-- SMEP/SMAP enabled
-- PTI (Meltdown mitigation)
+- KASLR, SMEP/SMAP, PTI
 - Retpoline (Spectre mitigation)
 - Kernel module signing enforced
 - Lockdown mode (integrity)
 - KFENCE memory safety
+- io_uring restrictions
+- BPF hardening
 
 ### Binary Protection
-- PIE (Position Independent Executables)
-- Full RELRO
-- Stack canaries
+- PIE, Full RELRO, Stack canaries
 - FORTIFY_SOURCE=3
-- NX/DEP enabled
-- CET (Control-flow Enforcement)
-- Shadow stack
+- NX/DEP, CET/IBT
+- Shadow stack (x86_64)
+- CFI (Control-Flow Integrity)
 
 ### Network Security
 - nftables firewall default
 - IPv6 privacy extensions
-- SYN cookies enabled
-- Reverse path filtering
+- SYN cookies, reverse path filtering
 - TCP timestamps disabled
 - ICMP redirect disabled
+- Wireguard built-in
 
 ### Application Security
-- AppArmor profiles
+- AppArmor + SELinux profiles
 - Seccomp-bpf filters
 - Namespace isolation
-- Capability dropping
 - Landlock LSM
 - IMA/EVM integrity
+- Bubblewrap sandboxing
 
 ---
 
-## 🛠️ Pre-Installed Security Tools (90+)
+## 🛠️ Pre-Installed Security Tools (115+)
 
-### Offensive Tools
+### Offensive Security
 
 | Tool | Language | Purpose |
 |------|----------|---------|
@@ -158,8 +183,10 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 | [nullsec-exploit](https://github.com/bad-antics/nullsec-exploit) | C | Binary exploitation framework |
 | [nullsec-c2](https://github.com/bad-antics/nullsec-c2) | Go | Command & control server |
 | [nullsec-phish](https://github.com/bad-antics/nullsec-phish) | Python | Phishing framework |
+| [nullsec-webfuzz](https://github.com/bad-antics/nullsec-webfuzz) | Rust | Web application fuzzer |
+| [nullsec-sqlinject](https://github.com/bad-antics/nullsec-sqlinject) | Python | SQL injection toolkit |
 
-### Network Tools
+### Network Security
 
 | Tool | Language | Purpose |
 |------|----------|---------|
@@ -169,8 +196,10 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 | [nullsec-sniffer](https://github.com/bad-antics/nullsec-sniffer) | Clojure | Packet capture |
 | [nullsec-flowtrace](https://github.com/bad-antics/nullsec-flowtrace) | Haskell | Flow analyzer |
 | [nullsec-crystalrecon](https://github.com/bad-antics/nullsec-crystalrecon) | Crystal | Network reconnaissance |
+| [nullsec-dnsenum](https://github.com/bad-antics/nullsec-dnsenum) | Go | DNS enumeration |
+| [nullsec-arpwatch](https://github.com/bad-antics/nullsec-arpwatch) | C | ARP monitoring |
 
-### Analysis Tools
+### Binary Analysis
 
 | Tool | Language | Purpose |
 |------|----------|---------|
@@ -179,9 +208,10 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 | [nullsec-kernspy](https://github.com/bad-antics/nullsec-kernspy) | Go | Kernel module analyzer |
 | [nullsec-zigscan](https://github.com/bad-antics/nullsec-zigscan) | Zig | Binary entropy analyzer |
 | [nullsec-nimhunter](https://github.com/bad-antics/nullsec-nimhunter) | Nim | Memory forensics |
-| [nullsec-ocamlparse](https://github.com/bad-antics/nullsec-ocamlparse) | OCaml | Security policy parser |
+| [nullsec-binarydiff](https://github.com/bad-antics/nullsec-binarydiff) | Rust | Binary diffing |
+| [nullsec-hexdump](https://github.com/bad-antics/nullsec-hexdump) | Zig | Hex analysis |
 
-### Cryptography Tools
+### Cryptography
 
 | Tool | Language | Purpose |
 |------|----------|---------|
@@ -189,16 +219,18 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 | [nullsec-hashwitch](https://github.com/bad-antics/nullsec-hashwitch) | Julia | Hash analysis |
 | [nullsec-adashield](https://github.com/bad-antics/nullsec-adashield) | Ada | Protocol validator |
 | [nullsec-vvault](https://github.com/bad-antics/nullsec-vvault) | V | Credential vault |
+| [nullsec-cryptoaudit](https://github.com/bad-antics/nullsec-cryptoaudit) | Rust | Crypto implementation audit |
 
-### Defense Tools
+### Defense & Detection
 
 | Tool | Language | Purpose |
 |------|----------|---------|
-| [nullsec-cppsentry](https://github.com/bad-antics/nullsec-cppsentry) | C++ | Packet sentinel |
+| [nullsec-cppsentry](https://github.com/bad-antics/nullsec-cppsentry) | C++20 | Packet sentinel |
 | [nullsec-swiftsentinel](https://github.com/bad-antics/nullsec-swiftsentinel) | Swift | macOS event monitor |
 | [nullsec-kotlinguard](https://github.com/bad-antics/nullsec-kotlinguard) | Kotlin | Container scanner |
 | [nullsec-clusterguard](https://github.com/bad-antics/nullsec-clusterguard) | Erlang | Distributed IDS |
 | [nullsec-luashield](https://github.com/bad-antics/nullsec-luashield) | Lua | WAF rules engine |
+| [nullsec-beaconhunt](https://github.com/bad-antics/nullsec-beaconhunt) | Go | C2 beacon detector |
 
 ### OSINT & Recon
 
@@ -209,22 +241,67 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 | [nullsec-perlscrub](https://github.com/bad-antics/nullsec-perlscrub) | Perl | Log sanitizer |
 | [nullsec-shelltrace](https://github.com/bad-antics/nullsec-shelltrace) | Tcl | Command auditor |
 | [nullsec-fsharpsignal](https://github.com/bad-antics/nullsec-fsharpsignal) | F# | Signal correlator |
+| [nullsec-credscan](https://github.com/bad-antics/nullsec-credscan) | Python | Credential finder |
 
 ### Mobile Security
 
 | Tool | Language | Purpose |
 |------|----------|---------|
-| [nullkia](https://github.com/bad-antics/nullkia) | Multi | Mobile security framework |
+| [nullkia](https://github.com/bad-antics/nullkia) | Multi | Mobile security framework v3.0 |
 | [nullsec-apkanalyzer](https://github.com/bad-antics/nullsec-apkanalyzer) | Kotlin | APK analysis |
 | [nullsec-iosextract](https://github.com/bad-antics/nullsec-iosextract) | Swift | iOS forensics |
+| [nullsec-android](https://github.com/bad-antics/nullsec-android) | Java | Android security |
+| [nullsec-bluetooth](https://github.com/bad-antics/nullsec-bluetooth) | C | Bluetooth research |
 
-### Automation & Scripting
+### Cloud Security (NEW)
+
+| Tool | Language | Purpose |
+|------|----------|---------|
+| [nullsec-cloudaudit](https://github.com/bad-antics/nullsec-cloudaudit) | Go | Multi-cloud auditor |
+| [nullsec-k8sscan](https://github.com/bad-antics/nullsec-k8sscan) | Go | Kubernetes security scanner |
+| [nullsec-awsrecon](https://github.com/bad-antics/nullsec-awsrecon) | Python | AWS enumeration |
+| [nullsec-gcphunt](https://github.com/bad-antics/nullsec-gcphunt) | Go | GCP security |
+| [nullsec-azuresweep](https://github.com/bad-antics/nullsec-azuresweep) | C# | Azure auditor |
+| [nullsec-terraform-scan](https://github.com/bad-antics/nullsec-terraform-scan) | Go | IaC security |
+
+### AI/ML Security (NEW)
+
+| Tool | Language | Purpose |
+|------|----------|---------|
+| [nullsec-llmred](https://github.com/bad-antics/nullsec-llmred) | Python | LLM red teaming |
+| [nullsec-promptinject](https://github.com/bad-antics/nullsec-promptinject) | Python | Prompt injection testing |
+| [nullsec-modelaudit](https://github.com/bad-antics/nullsec-modelaudit) | Python | ML model security audit |
+| [nullsec-adversarial](https://github.com/bad-antics/nullsec-adversarial) | Python | Adversarial ML |
+| [nullsec-datapoisoning](https://github.com/bad-antics/nullsec-datapoisoning) | Python | Training data attacks |
+
+### Hardware Hacking (NEW)
+
+| Tool | Language | Purpose |
+|------|----------|---------|
+| [nullsec-sdr](https://github.com/bad-antics/nullsec-sdr) | C/Python | Software-defined radio |
+| [nullsec-rfid](https://github.com/bad-antics/nullsec-rfid) | C | RFID/NFC research |
+| [nullsec-canbus](https://github.com/bad-antics/nullsec-canbus) | C | CAN bus analysis |
+| [nullsec-jtag](https://github.com/bad-antics/nullsec-jtag) | C | JTAG/SWD tools |
+| [nullsec-glitch](https://github.com/bad-antics/nullsec-glitch) | Python | Fault injection |
+| [nullsec-uart](https://github.com/bad-antics/nullsec-uart) | Python | UART/Serial tools |
+
+### Automotive Security (NEW)
+
+| Tool | Language | Purpose |
+|------|----------|---------|
+| [nullsec-carfuzz](https://github.com/bad-antics/nullsec-carfuzz) | C | CAN bus fuzzer |
+| [nullsec-obdii](https://github.com/bad-antics/nullsec-obdii) | Python | OBD-II toolkit |
+| [nullsec-uds](https://github.com/bad-antics/nullsec-uds) | Python | UDS protocol tools |
+| [nullsec-keyfob](https://github.com/bad-antics/nullsec-keyfob) | C | Key fob research |
+
+### Automation & Framework
 
 | Tool | Language | Purpose |
 |------|----------|---------|
 | [nullsec-framework](https://github.com/bad-antics/nullsec-framework) | Python | Unified framework |
 | [nullsec-dlangaudit](https://github.com/bad-antics/nullsec-dlangaudit) | D | Security auditor |
 | [nullsec-beacon](https://github.com/bad-antics/nullsec-beacon) | Erlang | Network beacon |
+| [nullsec-ocamlparse](https://github.com/bad-antics/nullsec-ocamlparse) | OCaml | Policy parser |
 
 ---
 
@@ -234,16 +311,16 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 
 | Component | Minimum | Recommended |
 |-----------|---------|-------------|
-| CPU | 64-bit x86_64 | Multi-core (4+) |
-| RAM | 2 GB | 16 GB |
-| Storage | 20 GB | 100 GB SSD |
+| CPU | 64-bit x86_64/ARM64 | Multi-core (4+) |
+| RAM | 4 GB | 16 GB |
+| Storage | 30 GB | 120 GB NVMe |
 | Graphics | Any | Hardware accel |
 
 ### Create Bootable USB
 
 ```bash
 # Linux/macOS
-sudo dd if=nullsec-pro-4.0-amd64.iso of=/dev/sdX bs=4M status=progress conv=fsync
+sudo dd if=nullsec-pro-5.0-amd64.iso of=/dev/sdX bs=4M status=progress conv=fsync
 
 # Or use Ventoy for multi-ISO boot
 sudo ventoy -i /dev/sdX
@@ -266,7 +343,10 @@ nullsec-framework
 nullsec-harden --profile maximum
 
 # Start anonymity mode
-nullsec-anon --tor --mac-spoof
+nullsec-anon --tor --mac-spoof --dns-over-tor
+
+# Launch NullKia (mobile)
+nullkia --gui
 ```
 
 ---
@@ -275,58 +355,24 @@ nullsec-anon --tor --mac-spoof
 
 ```
 /opt/nullsec/
-├── bin/           # 90+ NullSec tools
+├── bin/           # 115+ NullSec tools
 ├── configs/       # Configuration files
 ├── payloads/      # Payload templates
 ├── wordlists/     # Curated wordlists
 ├── scripts/       # Automation scripts
 ├── modules/       # Framework modules
+├── ai/            # AI/ML models (NEW)
+├── hardware/      # Hardware tool configs (NEW)
 └── docs/          # Documentation
 
 /etc/nullsec/
-├── Security/     # Security profiles
+├── security/      # Security profiles
 ├── firewall/      # nftables rules
 ├── apparmor/      # AppArmor profiles
 ├── seccomp/       # Seccomp filters
-└── integrity/     # IMA policies
+├── integrity/     # IMA policies
+└── cloud/         # Cloud provider configs (NEW)
 ```
-
----
-
-## 🆕 What's New in v4.0
-
-### New Tools Added
-- `nullsec-cppsentry` - C++20 packet sentinel
-- `nullsec-fsharpsignal` - F# signal correlator
-- `nullsec-adashield` - Ada crypto validator
-- `nullsec-crystalrecon` - Crystal network recon
-- `nullsec-kotlinguard` - Kotlin container scanner
-- `nullsec-swiftsentinel` - Swift macOS monitor
-- `nullsec-ocamlparse` - OCaml policy parser
-- `nullsec-clusterguard` - Erlang distributed IDS
-- `nullsec-reporaider` - Clojure secret scanner
-- `nullsec-luashield` - Lua WAF engine
-- `nullsec-juliaprobe` - Julia anomaly detector
-- `nullsec-perlscrub` - Perl log sanitizer
-- `nullsec-vvault` - V credential vault
-- `nullsec-nimhunter` - Nim memory forensics
-- `nullsec-zigscan` - Zig binary analyzer
-- `nullsec-shelltrace` - Tcl command auditor
-- `nullsec-flowtrace` - Haskell flow analyzer
-- `nullsec-dlangaudit` - D security auditor
-- `nullkia` v2.0 - Mobile security framework
-
-### Security Improvements
-- LUKS2 with Argon2id
-- Landlock LSM support
-- CET/Shadow stack
-- FORTIFY_SOURCE=3
-- Kernel lockdown mode
-
-### New Editions
-- Cloud edition (AWS/GCP/Azure)
-- Air-gapped edition
-- Apple Silicon support
 
 ---
 
@@ -335,11 +381,37 @@ nullsec-anon --tor --mac-spoof
 | Project | Description |
 |---------|-------------|
 | [nullsec-framework](https://github.com/bad-antics/nullsec-framework) | Unified toolkit framework |
+| [nullkia](https://github.com/bad-antics/nullkia) | Mobile security framework v3.0 |
 | [nullsec-payloads](https://github.com/bad-antics/nullsec-payloads) | Payload templates |
 | [nullsec-wordlists](https://github.com/bad-antics/nullsec-wordlists) | Curated wordlists |
 | [nullsec-configs](https://github.com/bad-antics/nullsec-configs) | Dotfiles & configs |
-| [nullkia](https://github.com/bad-antics/nullkia) | Mobile security framework |
 | [bad-antics.github.io](https://bad-antics.github.io) | Download portal |
+
+---
+
+## 📋 Changelog
+
+### v5.0.0 (January 2026)
+- **115+ tools** (25 new)
+- NullKia v3.0 integrated
+- Cloud pentesting edition (AWS/GCP/Azure/K8s)
+- AI/ML security suite (LLM red teaming)
+- Hardware hacking edition (SDR/RFID/IoT)
+- Automotive security tools (CAN bus)
+- Kernel 6.8 LTS
+- Wayland + Hyprland compositor
+- Full ARM64/Apple Silicon support
+- Enhanced isolation (Landlock, CFI)
+
+### v4.0.0 (2025)
+- 90+ tools
+- NullKia v2.0
+- Cloud edition
+- Apple Silicon via Asahi
+
+### v3.0.0 (2024)
+- Initial public release
+- 60+ tools
 
 ---
 
@@ -354,7 +426,8 @@ NullSec Public License v1.0 — For authorized security testing and education on
 `linux distribution` `security distro` `penetration testing` `ethical hacking` 
 `kali alternative` `parrot alternative` `red team` `blue team` `CTF` 
 `cybersecurity` `hacking tools` `privacy` `anonymity` `DFIR` `OSINT`
-`bad-antics` `nullsec` `security research` `secure linux` `security focused`
+`bad-antics` `nullsec` `cloud security` `kubernetes` `aws` `ai security`
+`hardware hacking` `automotive security` `mobile security` `iot security`
 
 ---
 
