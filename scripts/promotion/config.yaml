@@ -1,0 +1,78 @@
+# Promotion Automation Config
+# Fill in your API credentials
+
+github:
+  username: "bad-antics"
+  repos:
+    - nullsec-linux
+    - nullsec-webfuzz
+    - blackflag-ecu
+    - nullkia
+    - mysterymachine
+    - ai-entropy-mapper
+    - nullsec-beacon
+
+reddit:
+  client_id: "YOUR_REDDIT_CLIENT_ID"
+  client_secret: "YOUR_REDDIT_CLIENT_SECRET"
+  username: "YOUR_REDDIT_USERNAME"
+  password: "YOUR_REDDIT_PASSWORD"
+  user_agent: "NullSec Promoter v1.0"
+  
+  subreddits:
+    security:
+      - netsec
+      - hacking
+      - cybersecurity
+      - AskNetsec
+      - redteamsec
+    linux:
+      - linux
+      - linuxmasterrace
+      - unixporn
+    programming:
+      - rust
+      - golang
+      - Python
+    projects:
+      - SideProject
+      - coolgithubprojects
+      - opensource
+
+twitter:
+  api_key: "5nocJw6aCZpyVeaQ4LC9NdqMo"
+  api_secret: "tYQzldkiMzZEsOcxeeoly3JbooQxw8VMZAnJc8UlqRvRcLPRpI"
+  access_token: "928912615-Rl6riSpzO0eRSt5ai7shPxgJ8I1MExR2N7t8IJWv"
+  access_secret: "Cy4hDDZ7Y2cXq6ncYxqjldujEv4FXABMGvwECCH4NsvUH"
+  
+  hashtags:
+    - "#infosec"
+    - "#cybersecurity"
+    - "#pentesting"
+    - "#hacking"
+    - "#linux"
+    - "#opensource"
+    - "#bugbounty"
+    - "#redteam"
+
+hackernews:
+  username: "YOUR_HN_USERNAME"
+  password: "YOUR_HN_PASSWORD"
+
+discord:
+  webhook_url: "YOUR_DISCORD_WEBHOOK"
+
+schedule:
+  # Best posting times (UTC)
+  reddit_times: ["14:00", "18:00"]  # 9AM, 1PM EST
+  twitter_times: ["13:00", "17:00", "21:00"]
+  hn_times: ["15:00"]  # Tuesday-Thursday only
+
+templates:
+  nullsec-linux:
+    title: "NullSec Linux - Security distro with 135+ tools (Kali/Parrot alternative)"
+    short: "🔒 Just released NullSec Linux v5.0 - security-focused distro with 135+ pentesting tools, cloud edition, AI/ML security suite, and automotive hacking. Open source alternative to Kali/Parrot."
+    
+  nullsec-webfuzz:
+    title: "nullsec-webfuzz - High-performance web application fuzzer written in Rust"
+    short: "🦀 Built a blazing fast web fuzzer in Rust - async, memory-safe, with custom mutation engines. Great for bug bounty hunters."

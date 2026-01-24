@@ -1,0 +1,514 @@
+name: NullSec Response Bot
+
+on:
+  pull_request_target:
+    types: [opened, reopened, closed, synchronize]
+  pull_request_review:
+    types: [submitted]
+  issue_comment:
+    types: [created]
+  issues:
+    types: [opened, labeled]
+  schedule:
+    - cron: '0 9 * * 1'
+
+permissions:
+  pull-requests: write
+  issues: write
+  contents: read
+
+env:
+  STALE_DAYS: 14
+
+jobs:
+  welcome-issue:
+    if: github.event_name == 'issues' && github.event.action == 'opened'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome and Classify Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const author = issue.user.login;
+            const repoOwner = context.repo.owner;
+            
+            if (author === repoOwner) return;
+            
+            const title = issue.title.toLowerCase();
+            const body = (issue.body || '').toLowerCase();
+            
+            let response = '';
+            let labels = [];
+            let isPriority = false;
+            
+            // COLLABORATION REQUEST
+            if (body.includes('collaborate') || body.includes('team up') || 
+                body.includes('work together') || body.includes('partnership') ||
+                body.includes('join the team') || body.includes('contribute to nullsec') ||
+                title.includes('collaboration') || title.includes('team up')) {
+              
+              response = [
+                '## 👋 Hey @' + author + '! Thanks for reaching out about collaborating!',
+                '',
+                "I'm **always** excited to connect with fellow security researchers!",
+                '',
+                '### 🤝 Ways to Get Involved:',
+                '',
+                '| Type | Description |',
+                '|------|-------------|',
+                '| 🔧 **Code** | PRs welcome! |',
+                '| 📖 **Docs** | Help with documentation |',
+                '| 🧪 **Testing** | Test new features, report bugs |',
+                '| 💡 **Ideas** | Share feature ideas |',
+                '| 🔬 **Research** | Security research, CVE hunting |',
+                '',
+                '### 📋 Tell me more about:',
+                '1. Your background/expertise',
+                '2. Which NullSec tools interest you',
+                '3. How much time you can dedicate',
+                '',
+                "I'll respond personally very soon! 🚀",
+                '',
+                '---',
+                '*🤖 NullSec Bot - Flagged as priority*'
+              ].join('\n');
+              labels = ['collaboration', 'priority'];
+              isPriority = true;
+              
+            // BUG REPORT
+            } else if (title.includes('bug') || title.includes('error') || 
+                      title.includes('crash') || title.includes('not working')) {
+              
+              response = [
+                '## 👋 Thanks for the bug report, @' + author + '!',
+                '',
+                "I'll investigate this ASAP. To help me fix it faster:",
+                '',
+                '### 📋 Please Provide:',
+                '- **Environment:** OS, kernel version',
+                '- **Tool Version:** version output',
+                '- **Steps to Reproduce:** Exact commands',
+                '- **Expected vs Actual:** What happened',
+                '- **Logs:** Error messages if any',
+                '',
+                "I'll get back to you soon! 🔧",
+                '',
+                '---',
+                '*🤖 NullSec Bot*'
+              ].join('\n');
+              labels = ['bug', 'needs-triage'];
+              
+            // FEATURE REQUEST
+            } else if (title.includes('feature') || title.includes('request') ||
+                      title.includes('suggestion') || title.includes('add support')) {
+              
+              response = [
+                '## 👋 Thanks for the suggestion, @' + author + '!',
+                '',
+                'I love hearing ideas from users! ✨',
+                '',
+                '### 📋 To Help Evaluate:',
+                '1. **Use Case:** What problem does this solve?',
+                '2. **Current Workaround:** How do you handle this now?',
+                '3. **Priority:** Is this blocking your workflow?',
+                '',
+                'Thanks for helping improve NullSec! 💪',
+                '',
+                '---',
+                '*🤖 NullSec Bot*'
+              ].join('\n');
+              labels = ['enhancement'];
+              
+            // QUESTION
+            } else if (title.includes('?') || title.includes('how to') || 
+                      title.includes('help') || title.includes('question')) {
+              
+              response = [
+                '## 👋 Hey @' + author + '! Happy to help!',
+                '',
+                "I'll answer your question soon. In the meantime:",
+                '',
+                '### 📚 Resources:',
+                '- 📖 Check the **README** for documentation',
+                '- 🔍 Search **existing issues** for similar questions',
+                '',
+                "I'll get back to you shortly!",
+                '',
+                '---',
+                '*🤖 NullSec Bot*'
+              ].join('\n');
+              labels = ['question'];
+              
+            // SECURITY
+            } else if (title.includes('security') || title.includes('vulnerability') ||
+                      title.includes('cve') || title.includes('exploit')) {
+              
+              response = [
+                '## 🔒 Security Report Received',
+                '',
+                'Thanks @' + author + ' for the security report!',
+                '',
+                '⚠️ **Important:** If this is a sensitive vulnerability:',
+                '1. Do NOT post full exploit details publicly',
+                '2. Consider using GitHub private vulnerability reporting',
+                '',
+                "I'll review this with high priority!",
+                '',
+                '---',
+                '*🤖 NullSec Bot - Security issues are top priority*'
+              ].join('\n');
+              labels = ['security', 'priority'];
+              isPriority = true;
+              
+            // DEFAULT
+            } else {
+              response = [
+                '## 👋 Thanks for opening this issue, @' + author + '!',
+                '',
+                "I'll review it and respond soon.",
+                '',
+                '---',
+                '*🤖 NullSec Bot*'
+              ].join('\n');
+            }
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: response
+            });
+            
+            if (labels.length > 0) {
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  labels: labels
+                });
+              } catch (e) {
+                console.log('Could not add labels:', e.message);
+              }
+            }
+
+  auto-label:
+    if: github.event_name == 'pull_request_target' && (github.event.action == 'opened' || github.event.action == 'synchronize')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto Label PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const prNumber = pr.number;
+            const labels = [];
+            
+            const additions = pr.additions || 0;
+            const deletions = pr.deletions || 0;
+            const totalChanges = additions + deletions;
+            
+            if (totalChanges <= 10) labels.push('size/XS');
+            else if (totalChanges <= 50) labels.push('size/S');
+            else if (totalChanges <= 200) labels.push('size/M');
+            else if (totalChanges <= 500) labels.push('size/L');
+            else labels.push('size/XL');
+            
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
+            
+            const filenames = files.map(f => f.filename.toLowerCase());
+            
+            if (filenames.some(f => f.includes('readme') || f.endsWith('.md'))) labels.push('documentation');
+            if (filenames.some(f => f.includes('.github/workflows'))) labels.push('ci/cd');
+            if (filenames.some(f => f.endsWith('.rs'))) labels.push('rust');
+            if (filenames.some(f => f.endsWith('.go'))) labels.push('go');
+            if (filenames.some(f => f.endsWith('.py'))) labels.push('python');
+            
+            const title = pr.title.toLowerCase();
+            if (title.startsWith('feat')) labels.push('feature');
+            if (title.startsWith('fix')) labels.push('bugfix');
+            if (title.startsWith('docs')) labels.push('documentation');
+            
+            if (labels.length > 0) {
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber,
+                  labels: labels
+                });
+              } catch (e) {
+                console.log('Could not add labels:', e.message);
+              }
+            }
+
+  first-time-contributor:
+    if: github.event_name == 'pull_request_target' && github.event.action == 'opened'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check First Time Contributor
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prAuthor = context.payload.pull_request.user.login;
+            const repoOwner = context.repo.owner;
+            
+            if (prAuthor === repoOwner) return;
+            
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'all',
+              per_page: 100
+            });
+            
+            const authorPRs = prs.filter(p => p.user.login === prAuthor);
+            
+            if (authorPRs.length === 1) {
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.payload.pull_request.number,
+                  labels: ['first-contribution']
+                });
+              } catch (e) {}
+              
+              const msg = '🎉 **Welcome to the project, @' + prAuthor + '!** This is your first PR here!\n\nI really appreciate you taking the time to contribute. I will review this carefully and get back to you soon.\n\n---\n*🤖 NullSec Bot*';
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                body: msg
+              });
+            }
+
+  welcome-new-pr:
+    if: github.event_name == 'pull_request_target' && (github.event.action == 'opened' || github.event.action == 'reopened')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome PR Author
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prAuthor = context.payload.pull_request.user.login;
+            const prNumber = context.payload.pull_request.number;
+            const repoOwner = context.repo.owner;
+            
+            if (prAuthor === repoOwner) return;
+            
+            const welcomeMessage = [
+              '👋 Hey @' + prAuthor + '! Thanks for opening this PR!',
+              '',
+              "I'll review this as soon as I can. Here's what happens next:",
+              '',
+              '- 🔍 I will review your changes',
+              '- 💬 I may leave some comments or suggestions',
+              '- ✅ Once everything looks good, I will merge it',
+              '',
+              '---',
+              '*🤖 NullSec Bot*'
+            ].join('\n');
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: welcomeMessage
+            });
+
+  respond-to-review:
+    if: github.event_name == 'pull_request_review'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Respond to Review
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const review = context.payload.review;
+            const prNumber = context.payload.pull_request.number;
+            const reviewer = review.user.login;
+            const repoOwner = context.repo.owner;
+            const prAuthor = context.payload.pull_request.user.login;
+            
+            if (reviewer !== repoOwner || prAuthor === repoOwner) return;
+            
+            let responseMessage = '';
+            
+            if (review.state === 'approved') {
+              responseMessage = '✅ **Approved!**\n\nThanks for your contribution @' + prAuthor + '! I will merge this shortly.\n\n---\n*🤖 NullSec Bot*';
+            } else if (review.state === 'changes_requested') {
+              responseMessage = '📝 **Changes Requested**\n\nHey @' + prAuthor + ', I have left some feedback above. Please take a look and update your PR when you get a chance.\n\n---\n*🤖 NullSec Bot*';
+            }
+            
+            if (responseMessage) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: responseMessage
+              });
+            }
+
+  handle-commands:
+    if: github.event_name == 'issue_comment' && github.event.issue.pull_request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Handle Bot Commands
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = context.payload.comment.body.toLowerCase().trim();
+            const commenter = context.payload.comment.user.login;
+            const prNumber = context.payload.issue.number;
+            const repoOwner = context.repo.owner;
+            
+            const commands = {
+              '/status': '📊 **PR Status**\n\n- **State:** ' + context.payload.issue.state + '\n- **Labels:** ' + (context.payload.issue.labels.map(l => l.name).join(', ') || 'None') + '\n\n---\n*🤖 NullSec Bot*',
+              '/help': '🤖 **NullSec Bot Commands**\n\n| Command | Description | Access |\n|---------|-------------|--------|\n| `/status` | Check PR status | Anyone |\n| `/help` | Show this help | Anyone |\n| `/ping` | Check if bot active | Anyone |\n| `/lgtm` | Approve PR | Owner |\n| `/merge` | Merge PR | Owner |\n| `/close` | Close PR | Owner |\n\n---\n*🤖 NullSec Bot*',
+              '/ping': '🏓 **Pong!** Bot is active.\n\n---\n*🤖 NullSec Bot*'
+            };
+            
+            for (const [cmd, response] of Object.entries(commands)) {
+              if (comment.startsWith(cmd)) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber,
+                  body: response
+                });
+                return;
+              }
+            }
+            
+            if (commenter === repoOwner) {
+              if (comment.includes('/lgtm') || comment.includes('/approve')) {
+                await github.rest.pulls.createReview({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: prNumber,
+                  event: 'APPROVE',
+                  body: '✅ LGTM! Approved via bot command.'
+                });
+              }
+              
+              if (comment.includes('/merge')) {
+                try {
+                  await github.rest.pulls.merge({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: prNumber,
+                    merge_method: 'squash'
+                  });
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: prNumber,
+                    body: '🎉 **Merged!** Thanks for your contribution!\n\n---\n*🤖 NullSec Bot*'
+                  });
+                } catch (e) {
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: prNumber,
+                    body: '❌ **Merge failed:** ' + e.message + '\n\n---\n*🤖 NullSec Bot*'
+                  });
+                }
+              }
+              
+              if (comment.includes('/close')) {
+                await github.rest.pulls.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: prNumber,
+                  state: 'closed'
+                });
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber,
+                  body: '🚪 **PR Closed** by maintainer.\n\n---\n*🤖 NullSec Bot*'
+                });
+              }
+            }
+
+  thank-on-merge:
+    if: github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Thank Contributor on Merge
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const author = pr.user.login;
+            const repoOwner = context.repo.owner;
+            
+            if (author === repoOwner) return;
+            
+            const messages = [
+              '🎉 **Merged!** Thanks @' + author + ' for this contribution!',
+              '✨ **Awesome!** Your changes are now part of the project, @' + author + '!',
+              '🚀 **Shipped!** Thanks for the great work, @' + author + '!'
+            ];
+            
+            const message = messages[Math.floor(Math.random() * messages.length)];
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              body: message + '\n\nYour contribution helps make this project better for everyone. 🙏\n\n---\n*🤖 NullSec Bot*'
+            });
+
+  stale-check:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for Stale PRs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              sort: 'updated',
+              direction: 'asc'
+            });
+            
+            const now = new Date();
+            const staleDays = 14;
+            
+            for (const pr of prs) {
+              const updatedAt = new Date(pr.updated_at);
+              const daysSinceUpdate = Math.floor((now - updatedAt) / (1000 * 60 * 60 * 24));
+              
+              if (daysSinceUpdate >= staleDays) {
+                const hasStaleLabel = pr.labels.some(l => l.name === 'stale');
+                
+                if (!hasStaleLabel) {
+                  try {
+                    await github.rest.issues.addLabels({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: pr.number,
+                      labels: ['stale']
+                    });
+                  } catch (e) {}
+                  
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: pr.number,
+                    body: '👋 Hey @' + pr.user.login + ', this PR has been inactive for ' + daysSinceUpdate + ' days.\n\nIs this still something you are working on? If so, please update or leave a comment.\n\n---\n*🤖 NullSec Bot*'
+                  });
+                }
+              }
+            }
