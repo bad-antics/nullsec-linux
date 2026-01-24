@@ -1,0 +1,500 @@
+name: NullSec Community Monitor
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'  # Every 4 hours
+  workflow_dispatch:  # Manual trigger
+  issues:
+    types: [opened, commented]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  # Monitor all community activity across NullSec repos
+  monitor-community:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Community Activity Monitor
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = 'bad-antics';
+            const nullsecRepos = [
+              'nullsec-linux', 'nullkia', 'nullsec-beacon', 'nullsec-webfuzz',
+              'nullsec-sniffer', 'nullsec-memguard', 'nullsec-netseer',
+              'nullsec-injector', 'nullsec-cryptocheck', 'nullsec-yara',
+              'nullsec-recon', 'nullsec-shellcraft', 'nullsec-canbus',
+              'nullsec-sdr', 'nullsec-cloudaudit', 'nullsec-zigcrypt',
+              'blackflag-ecu', 'bad-antics'
+            ];
+            
+            let alerts = {
+              bugReports: [],
+              featureRequests: [],
+              questions: [],
+              collaborationRequests: [],
+              prResponses: [],
+              mentions: []
+            };
+            
+            console.log('🔍 NullSec Community Monitor Starting...\n');
+            
+            // ========== 1. CHECK ISSUES ACROSS NULLSEC REPOS ==========
+            console.log('📋 Checking issues across NullSec repos...');
+            
+            for (const repo of nullsecRepos) {
+              try {
+                const { data: issues } = await github.rest.issues.listForRepo({
+                  owner: owner,
+                  repo: repo,
+                  state: 'open',
+                  per_page: 50,
+                  sort: 'updated'
+                });
+                
+                for (const issue of issues) {
+                  // Skip PRs (they show up in issues API too)
+                  if (issue.pull_request) continue;
+                  
+                  const title = issue.title.toLowerCase();
+                  const body = (issue.body || '').toLowerCase();
+                  const labels = issue.labels.map(l => l.name.toLowerCase());
+                  
+                  // Classify issue type
+                  const isBug = labels.includes('bug') || 
+                               title.includes('bug') || 
+                               title.includes('error') || 
+                               title.includes('crash') ||
+                               title.includes('not working') ||
+                               title.includes('broken');
+                               
+                  const isFeature = labels.includes('enhancement') || 
+                                   labels.includes('feature') ||
+                                   title.includes('feature request') ||
+                                   title.includes('suggestion') ||
+                                   title.includes('would be nice') ||
+                                   title.includes('add support');
+                                   
+                  const isQuestion = labels.includes('question') ||
+                                    title.includes('how to') ||
+                                    title.includes('help') ||
+                                    title.includes('?');
+                  
+                  const isCollab = body.includes('collaborate') ||
+                                  body.includes('team up') ||
+                                  body.includes('work together') ||
+                                  body.includes('partnership') ||
+                                  body.includes('contribute') ||
+                                  body.includes('join') ||
+                                  title.includes('collaboration');
+                  
+                  // Check if needs response (no owner comment after issue creation)
+                  const { data: comments } = await github.rest.issues.listComments({
+                    owner: owner,
+                    repo: repo,
+                    issue_number: issue.number,
+                    per_page: 20
+                  });
+                  
+                  const ownerResponded = comments.some(c => c.user.login === owner);
+                  
+                  const issueData = {
+                    repo: `${owner}/${repo}`,
+                    number: issue.number,
+                    title: issue.title,
+                    author: issue.user.login,
+                    url: issue.html_url,
+                    created: issue.created_at,
+                    labels: labels,
+                    responded: ownerResponded
+                  };
+                  
+                  if (isCollab) {
+                    alerts.collaborationRequests.push(issueData);
+                    console.log(`🤝 Collaboration request: ${repo} #${issue.number}`);
+                  } else if (isBug && !ownerResponded) {
+                    alerts.bugReports.push(issueData);
+                    console.log(`🐛 Bug report needs response: ${repo} #${issue.number}`);
+                  } else if (isFeature && !ownerResponded) {
+                    alerts.featureRequests.push(issueData);
+                    console.log(`✨ Feature request: ${repo} #${issue.number}`);
+                  } else if (isQuestion && !ownerResponded) {
+                    alerts.questions.push(issueData);
+                    console.log(`❓ Question needs answer: ${repo} #${issue.number}`);
+                  }
+                }
+              } catch (e) {
+                // Repo might not exist or be accessible
+              }
+            }
+            
+            // ========== 2. CHECK MENTIONS ==========
+            console.log('\n🔔 Checking mentions...');
+            
+            try {
+              const { data: notifications } = await github.rest.activity.listNotificationsForAuthenticatedUser({
+                all: false,
+                per_page: 50
+              });
+              
+              for (const notif of notifications) {
+                if (notif.reason === 'mention' || notif.reason === 'team_mention') {
+                  alerts.mentions.push({
+                    repo: notif.repository.full_name,
+                    title: notif.subject.title,
+                    type: notif.subject.type,
+                    url: notif.subject.url,
+                    reason: notif.reason
+                  });
+                  console.log(`📣 Mentioned in: ${notif.repository.full_name}`);
+                }
+              }
+            } catch (e) {
+              console.log('Could not fetch notifications:', e.message);
+            }
+            
+            // ========== 3. CHECK OPEN PRS FOR RESPONSES ==========
+            console.log('\n📬 Checking PRs for responses needed...');
+            
+            try {
+              const { data: prs } = await github.rest.search.issuesAndPullRequests({
+                q: `is:pr is:open author:${owner}`,
+                per_page: 100,
+                sort: 'updated'
+              });
+              
+              for (const pr of prs.items) {
+                const [repoOwner, repoName] = pr.repository_url.split('/').slice(-2);
+                
+                try {
+                  const { data: comments } = await github.rest.issues.listComments({
+                    owner: repoOwner,
+                    repo: repoName,
+                    issue_number: pr.number,
+                    per_page: 30
+                  });
+                  
+                  const maintainerComments = comments.filter(c => 
+                    c.user.login !== owner && 
+                    !c.user.login.toLowerCase().includes('bot') &&
+                    c.user.type !== 'Bot'
+                  );
+                  
+                  if (maintainerComments.length > 0) {
+                    const lastMaintainer = maintainerComments[maintainerComments.length - 1];
+                    const myComments = comments.filter(c => c.user.login === owner);
+                    const lastMy = myComments.length > 0 ? myComments[myComments.length - 1] : null;
+                    
+                    if (new Date(lastMaintainer.created_at) > (lastMy ? new Date(lastMy.created_at) : new Date(0))) {
+                      alerts.prResponses.push({
+                        repo: `${repoOwner}/${repoName}`,
+                        number: pr.number,
+                        title: pr.title,
+                        maintainer: lastMaintainer.user.login,
+                        comment: lastMaintainer.body.substring(0, 200),
+                        url: pr.html_url
+                      });
+                      console.log(`💬 PR needs response: ${repoOwner}/${repoName} #${pr.number}`);
+                    }
+                  }
+                } catch (e) {}
+              }
+            } catch (e) {
+              console.log('Error searching PRs:', e.message);
+            }
+            
+            // ========== 4. SEARCH FOR COLLABORATION MENTIONS ==========
+            console.log('\n🔎 Searching for collaboration opportunities...');
+            
+            const collabKeywords = [
+              'nullsec collaborate',
+              'nullsec contribution',
+              'nullsec help wanted',
+              'bad-antics team',
+              'nullkia contribute'
+            ];
+            
+            for (const keyword of collabKeywords) {
+              try {
+                const { data: results } = await github.rest.search.issuesAndPullRequests({
+                  q: `${keyword} is:open`,
+                  per_page: 10
+                });
+                
+                for (const item of results.items) {
+                  if (!alerts.collaborationRequests.some(c => c.url === item.html_url)) {
+                    alerts.collaborationRequests.push({
+                      repo: item.repository_url.split('/').slice(-2).join('/'),
+                      number: item.number,
+                      title: item.title,
+                      author: item.user.login,
+                      url: item.html_url,
+                      type: 'search-result'
+                    });
+                  }
+                }
+              } catch (e) {}
+            }
+            
+            // ========== 5. CREATE SUMMARY ISSUE ==========
+            console.log('\n📊 Creating summary...');
+            
+            const totalAlerts = 
+              alerts.bugReports.length + 
+              alerts.featureRequests.length + 
+              alerts.questions.length + 
+              alerts.collaborationRequests.length + 
+              alerts.prResponses.length +
+              alerts.mentions.length;
+            
+            if (totalAlerts > 0) {
+              const issueBody = `# 🔔 NullSec Community Activity Report
+            
+            **Generated:** ${new Date().toISOString()}
+            
+            ## Summary
+            | Category | Count |
+            |----------|-------|
+            | 🐛 Bug Reports | ${alerts.bugReports.length} |
+            | ✨ Feature Requests | ${alerts.featureRequests.length} |
+            | ❓ Questions | ${alerts.questions.length} |
+            | 🤝 Collaboration Requests | ${alerts.collaborationRequests.length} |
+            | 💬 PR Responses Needed | ${alerts.prResponses.length} |
+            | 📣 Mentions | ${alerts.mentions.length} |
+            
+            ---
+            
+            ${alerts.collaborationRequests.length > 0 ? `
+            ## 🤝 Collaboration Requests (Priority!)
+            ${alerts.collaborationRequests.map(c => `
+            - [${c.repo} #${c.number}](${c.url}) - **${c.title}**
+              - From: @${c.author}
+            `).join('\n')}
+            ` : ''}
+            
+            ${alerts.bugReports.length > 0 ? `
+            ## 🐛 Bug Reports Needing Response
+            ${alerts.bugReports.map(b => `
+            - [${b.repo} #${b.number}](${b.url}) - ${b.title}
+              - From: @${b.author} | Labels: ${b.labels.join(', ') || 'none'}
+            `).join('\n')}
+            ` : ''}
+            
+            ${alerts.featureRequests.length > 0 ? `
+            ## ✨ Feature Requests
+            ${alerts.featureRequests.map(f => `
+            - [${f.repo} #${f.number}](${f.url}) - ${f.title}
+              - From: @${f.author}
+            `).join('\n')}
+            ` : ''}
+            
+            ${alerts.questions.length > 0 ? `
+            ## ❓ Questions Needing Answers
+            ${alerts.questions.map(q => `
+            - [${q.repo} #${q.number}](${q.url}) - ${q.title}
+              - From: @${q.author}
+            `).join('\n')}
+            ` : ''}
+            
+            ${alerts.prResponses.length > 0 ? `
+            ## 💬 PRs Needing Response
+            ${alerts.prResponses.map(p => `
+            - [${p.repo} #${p.number}](${p.url}) - ${p.title}
+              - @${p.maintainer} said: "${p.comment.substring(0, 100)}..."
+            `).join('\n')}
+            ` : ''}
+            
+            ${alerts.mentions.length > 0 ? `
+            ## 📣 Recent Mentions
+            ${alerts.mentions.map(m => `
+            - ${m.repo} - ${m.title} (${m.type})
+            `).join('\n')}
+            ` : ''}
+            
+            ---
+            *🤖 Auto-generated by NullSec Community Monitor*
+            `;
+              
+              // Update or create monitoring issue
+              try {
+                const { data: existingIssues } = await github.rest.issues.listForRepo({
+                  owner: owner,
+                  repo: owner,
+                  state: 'open',
+                  labels: 'community-monitor',
+                  per_page: 1
+                });
+                
+                if (existingIssues.length > 0) {
+                  await github.rest.issues.update({
+                    owner: owner,
+                    repo: owner,
+                    issue_number: existingIssues[0].number,
+                    title: `🔔 ${totalAlerts} Community Items Need Attention`,
+                    body: issueBody
+                  });
+                  console.log(`Updated monitoring issue #${existingIssues[0].number}`);
+                } else {
+                  await github.rest.issues.create({
+                    owner: owner,
+                    repo: owner,
+                    title: `🔔 ${totalAlerts} Community Items Need Attention`,
+                    body: issueBody,
+                    labels: ['community-monitor']
+                  });
+                  console.log('Created new monitoring issue');
+                }
+              } catch (e) {
+                console.log('Could not create/update issue:', e.message);
+              }
+            } else {
+              console.log('✅ No items needing attention!');
+            }
+            
+            console.log('\n✅ Community Monitor Complete');
+            return alerts;
+
+  # Auto-respond to new issues on NullSec repos
+  auto-respond-issues:
+    if: github.event_name == 'issues' && github.event.action == 'opened'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-Respond to New Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const author = issue.user.login;
+            const owner = context.repo.owner;
+            
+            // Don't respond to own issues
+            if (author === owner) return;
+            
+            const title = issue.title.toLowerCase();
+            const body = (issue.body || '').toLowerCase();
+            
+            // Detect issue type and respond accordingly
+            let response = '';
+            let labels = [];
+            
+            // Collaboration request
+            if (body.includes('collaborate') || body.includes('team up') || 
+                body.includes('work together') || body.includes('contribute') ||
+                title.includes('collaboration')) {
+              response = `
+            👋 Hey @${author}! Thanks for reaching out about collaborating!
+            
+            I'm always excited to work with other security researchers and developers. Here's how we can connect:
+            
+            **Ways to collaborate:**
+            - 🔧 **Code Contributions** - PRs are always welcome! Check out the issues labeled \`good first issue\`
+            - 📖 **Documentation** - Help improve docs, tutorials, or write blog posts
+            - 🧪 **Testing** - Help test new features or find bugs
+            - 💡 **Ideas** - Share your ideas for new features or improvements
+            
+            **Let's discuss:**
+            - What specific area interests you?
+            - What's your background/expertise?
+            - Any specific tools or features you'd like to work on?
+            
+            Looking forward to working together! 🚀
+            
+            ---
+            *🤖 NullSec Bot - I'll follow up personally soon!*
+            `;
+              labels = ['collaboration', 'priority'];
+              
+            // Bug report
+            } else if (title.includes('bug') || title.includes('error') || 
+                      title.includes('crash') || title.includes('not working')) {
+              response = `
+            👋 Hey @${author}! Thanks for reporting this issue!
+            
+            To help me investigate faster, could you please provide:
+            
+            - **OS/Environment:** (e.g., Ubuntu 22.04, Arch Linux)
+            - **Version:** (which version of the tool?)
+            - **Steps to reproduce:** (what exactly did you do?)
+            - **Expected behavior:** (what should have happened?)
+            - **Actual behavior:** (what actually happened?)
+            - **Logs/Error messages:** (if any)
+            
+            I'll look into this as soon as I can! 🔍
+            
+            ---
+            *🤖 NullSec Bot*
+            `;
+              labels = ['bug', 'needs-info'];
+              
+            // Feature request
+            } else if (title.includes('feature') || title.includes('request') ||
+                      title.includes('suggestion') || title.includes('add')) {
+              response = `
+            👋 Hey @${author}! Thanks for the feature suggestion!
+            
+            I appreciate you taking the time to share your ideas. To help evaluate this:
+            
+            - **Use case:** How would this feature help you?
+            - **Priority:** Is this blocking your workflow?
+            - **Alternatives:** Have you tried any workarounds?
+            
+            I'll review this and let you know my thoughts! ✨
+            
+            ---
+            *🤖 NullSec Bot*
+            `;
+              labels = ['enhancement'];
+              
+            // Question
+            } else if (title.includes('?') || title.includes('how') || 
+                      title.includes('help') || body.includes('question')) {
+              response = `
+            👋 Hey @${author}! Thanks for reaching out!
+            
+            I'll get back to you with an answer soon. In the meantime, you might find these helpful:
+            
+            - 📖 Check the README for documentation
+            - 🔍 Search existing issues for similar questions
+            - 💬 Join discussions in other issues
+            
+            ---
+            *🤖 NullSec Bot*
+            `;
+              labels = ['question'];
+              
+            // Default welcome
+            } else {
+              response = `
+            👋 Hey @${author}! Thanks for opening this issue!
+            
+            I'll review this and get back to you soon. If this is urgent, please let me know!
+            
+            ---
+            *🤖 NullSec Bot*
+            `;
+            }
+            
+            // Post response
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: response
+            });
+            
+            // Add labels
+            if (labels.length > 0) {
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  labels: labels
+                });
+              } catch (e) {
+                console.log('Could not add labels:', e.message);
+              }
+            }

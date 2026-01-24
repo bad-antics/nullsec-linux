@@ -1,0 +1,544 @@
+name: NullSec Auto-Fix Bot
+
+on:
+  issues:
+    types: [opened, labeled]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  analyze-and-fix:
+    if: |
+      github.event_name == 'issues' && 
+      github.event.action == 'opened' &&
+      (contains(github.event.issue.title, 'bug') || 
+       contains(github.event.issue.title, 'error') ||
+       contains(github.event.issue.title, 'fix') ||
+       contains(github.event.issue.title, 'broken'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: Analyze Bug Report
+        id: analyze
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const author = issue.user.login;
+            const title = issue.title.toLowerCase();
+            const body = (issue.body || '').toLowerCase();
+            
+            console.log('📋 Analyzing issue #' + issue.number + ' from @' + author);
+            
+            // Extract key information from the bug report
+            const analysis = {
+              hasSteps: body.includes('step') || body.includes('reproduce'),
+              hasExpected: body.includes('expected') || body.includes('should'),
+              hasActual: body.includes('actual') || body.includes('instead') || body.includes('but'),
+              hasError: body.includes('error') || body.includes('exception') || body.includes('traceback'),
+              hasVersion: body.includes('version') || body.includes('v1') || body.includes('v2'),
+              hasOS: body.includes('linux') || body.includes('windows') || body.includes('mac') || body.includes('ubuntu'),
+              mentionsFile: body.match(/[\w\-]+\.(py|rs|go|js|ts|c|cpp|h|sh|yaml|yml|json|toml|md)/gi),
+              mentionsFunction: body.match(/`[\w_]+`|function\s+[\w_]+|def\s+[\w_]+|fn\s+[\w_]+/gi),
+              errorMessages: body.match(/error[:\s]+[^\n]+|exception[:\s]+[^\n]+|failed[:\s]+[^\n]+/gi)
+            };
+            
+            // Calculate issue quality score
+            let qualityScore = 0;
+            if (analysis.hasSteps) qualityScore += 2;
+            if (analysis.hasExpected) qualityScore += 2;
+            if (analysis.hasActual) qualityScore += 2;
+            if (analysis.hasError) qualityScore += 1;
+            if (analysis.hasVersion) qualityScore += 1;
+            if (analysis.hasOS) qualityScore += 1;
+            if (analysis.mentionsFile) qualityScore += 2;
+            
+            console.log('Quality Score: ' + qualityScore + '/11');
+            console.log('Analysis:', JSON.stringify(analysis, null, 2));
+            
+            // Determine if we can attempt auto-fix
+            const canAttemptFix = qualityScore >= 5 && analysis.mentionsFile;
+            
+            // Store analysis for next steps
+            core.setOutput('quality_score', qualityScore);
+            core.setOutput('can_fix', canAttemptFix);
+            core.setOutput('mentioned_files', JSON.stringify(analysis.mentionsFile || []));
+            core.setOutput('author', author);
+            
+            return analysis;
+
+      - name: Acknowledge Bug Report
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const author = issue.user.login;
+            const qualityScore = parseInt('${{ steps.analyze.outputs.quality_score }}');
+            const canFix = '${{ steps.analyze.outputs.can_fix }}' === 'true';
+            
+            let response = '';
+            let labels = ['bug', 'analyzing'];
+            
+            if (qualityScore >= 7) {
+              response = [
+                '## 🎯 Excellent Bug Report!',
+                '',
+                'Thanks @' + author + ' for this detailed report! Quality score: **' + qualityScore + '/11** ⭐',
+                '',
+                '### 🔍 Analysis Status:',
+                '- ✅ Steps to reproduce: ' + (qualityScore >= 2 ? 'Found' : 'Missing'),
+                '- ✅ Expected behavior: Described',
+                '- ✅ Actual behavior: Described',
+                '',
+                canFix ? '### 🤖 Auto-Fix Attempt:' : '',
+                canFix ? 'I will analyze the mentioned files and attempt to create a fix.' : '',
+                canFix ? 'You will be **credited** in the fix commit if successful!' : '',
+                '',
+                '---',
+                '*🤖 NullSec Auto-Fix Bot*'
+              ].join('\n');
+              labels.push('high-quality');
+            } else if (qualityScore >= 4) {
+              response = [
+                '## 👍 Good Bug Report',
+                '',
+                'Thanks @' + author + '! Quality score: **' + qualityScore + '/11**',
+                '',
+                '### 📋 To help me fix this faster, please add:',
+                qualityScore < 5 ? '- [ ] Steps to reproduce' : '',
+                '- [ ] Expected vs actual behavior',
+                '- [ ] Error messages or logs',
+                '- [ ] File/function where the bug occurs',
+                '',
+                '---',
+                '*🤖 NullSec Auto-Fix Bot*'
+              ].filter(l => l).join('\n');
+            } else {
+              response = [
+                '## 📝 Bug Report Received',
+                '',
+                'Thanks @' + author + '! Quality score: **' + qualityScore + '/11**',
+                '',
+                '### ⚠️ Need More Information:',
+                'To investigate this bug, please provide:',
+                '',
+                '1. **Steps to reproduce** - What exactly did you do?',
+                '2. **Expected behavior** - What should happen?',
+                '3. **Actual behavior** - What actually happened?',
+                '4. **Environment** - OS, version, etc.',
+                '5. **Error messages** - Full error output if any',
+                '',
+                '---',
+                '*🤖 NullSec Auto-Fix Bot*'
+              ].join('\n');
+              labels.push('needs-info');
+            }
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: response
+            });
+            
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels
+              });
+            } catch (e) {
+              console.log('Could not add labels:', e.message);
+            }
+
+  process-fix-request:
+    if: |
+      github.event_name == 'issue_comment' &&
+      contains(github.event.comment.body, '/fix') &&
+      github.event.comment.user.login == github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: Process Fix Command
+        uses: actions/github-script@v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const comment = context.payload.comment;
+            const issueAuthor = issue.user.login;
+            const issueNumber = issue.number;
+            
+            // Parse fix command
+            const fixMatch = comment.body.match(/\/fix\s+(.+)/);
+            if (!fixMatch) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                body: '❌ **Fix command format:** `/fix <description of fix>`\n\n---\n*🤖 NullSec Auto-Fix Bot*'
+              });
+              return;
+            }
+            
+            const fixDescription = fixMatch[1];
+            
+            // Acknowledge the fix
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: [
+                '## 🔧 Fix Initiated',
+                '',
+                '**Description:** ' + fixDescription,
+                '',
+                '### 📝 Actions:',
+                '- Creating fix branch',
+                '- Implementing changes',
+                '- Will credit @' + issueAuthor + ' for reporting',
+                '',
+                '---',
+                '*🤖 NullSec Auto-Fix Bot*'
+              ].join('\n')
+            });
+            
+            // Add labels
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                labels: ['fix-in-progress']
+              });
+            } catch (e) {}
+
+  credit-reporter:
+    if: |
+      github.event_name == 'issues' &&
+      github.event.action == 'labeled' &&
+      github.event.label.name == 'fixed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Credit Bug Reporter
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const author = issue.user.login;
+            const issueNumber = issue.number;
+            
+            // Thank and credit the reporter
+            const creditMessage = [
+              '## 🎉 Bug Fixed!',
+              '',
+              '### 🏆 Credit',
+              'Thanks to **@' + author + '** for reporting this bug!',
+              '',
+              'Your contribution has been noted in:',
+              '- The fix commit message',
+              '- CONTRIBUTORS.md (if applicable)',
+              '',
+              '### 📦 Release',
+              'This fix will be included in the next release.',
+              '',
+              'Thanks for helping improve NullSec! 🙏',
+              '',
+              '---',
+              '*🤖 NullSec Auto-Fix Bot*'
+            ].join('\n');
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: creditMessage
+            });
+            
+            // Close the issue
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              state: 'closed',
+              state_reason: 'completed'
+            });
+
+  handle-feature-request:
+    if: |
+      github.event_name == 'issues' &&
+      github.event.action == 'opened' &&
+      (contains(github.event.issue.title, 'feature') ||
+       contains(github.event.issue.title, 'suggestion') ||
+       contains(github.event.issue.title, 'request') ||
+       contains(github.event.issue.title, 'add'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Evaluate Feature Request
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const author = issue.user.login;
+            const body = (issue.body || '').toLowerCase();
+            
+            // Analyze feature request quality
+            const analysis = {
+              hasUseCase: body.includes('use case') || body.includes('would help') || body.includes('need'),
+              hasDescription: body.length > 100,
+              hasExample: body.includes('example') || body.includes('like') || body.includes('similar'),
+              hasBenefit: body.includes('benefit') || body.includes('improve') || body.includes('better'),
+              isWellFormatted: body.includes('##') || body.includes('*') || body.includes('-')
+            };
+            
+            let qualityScore = 0;
+            if (analysis.hasUseCase) qualityScore += 2;
+            if (analysis.hasDescription) qualityScore += 2;
+            if (analysis.hasExample) qualityScore += 2;
+            if (analysis.hasBenefit) qualityScore += 2;
+            if (analysis.isWellFormatted) qualityScore += 1;
+            
+            let response = '';
+            let labels = ['enhancement'];
+            
+            if (qualityScore >= 6) {
+              response = [
+                '## ✨ Great Feature Request!',
+                '',
+                'Thanks @' + author + ' for this well-thought-out suggestion!',
+                '',
+                '### 📊 Evaluation:',
+                '- Quality Score: **' + qualityScore + '/9** ⭐',
+                '- Use case: ' + (analysis.hasUseCase ? '✅ Clear' : '⚠️ Could be clearer'),
+                '- Description: ' + (analysis.hasDescription ? '✅ Detailed' : '⚠️ Brief'),
+                '- Examples: ' + (analysis.hasExample ? '✅ Provided' : '❌ Missing'),
+                '',
+                '### 📋 Next Steps:',
+                '1. I will evaluate feasibility',
+                '2. If approved, it goes on the roadmap',
+                '3. You are welcome to submit a PR implementing it!',
+                '',
+                'You will be **credited** if this feature is implemented! 🏆',
+                '',
+                '---',
+                '*🤖 NullSec Auto-Fix Bot*'
+              ].join('\n');
+              labels.push('good-idea', 'considering');
+            } else {
+              response = [
+                '## 💡 Feature Request Received',
+                '',
+                'Thanks @' + author + ' for the suggestion!',
+                '',
+                '### 📝 To help evaluate this, please add:',
+                !analysis.hasUseCase ? '- **Use case:** Why do you need this?' : '',
+                !analysis.hasExample ? '- **Examples:** How would it work?' : '',
+                !analysis.hasBenefit ? '- **Benefits:** How does it improve the project?' : '',
+                '',
+                '---',
+                '*🤖 NullSec Auto-Fix Bot*'
+              ].filter(l => l).join('\n');
+            }
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: response
+            });
+            
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels
+              });
+            } catch (e) {}
+
+  owner-commands:
+    if: |
+      github.event_name == 'issue_comment' &&
+      github.event.comment.user.login == github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Handle Owner Commands
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = context.payload.comment.body.trim();
+            const issue = context.payload.issue;
+            const issueNumber = issue.number;
+            const issueAuthor = issue.user.login;
+            
+            // /confirm - Confirm bug is valid and credit reporter
+            if (comment.startsWith('/confirm')) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                body: [
+                  '## ✅ Bug Confirmed!',
+                  '',
+                  'This bug has been verified by the maintainer.',
+                  '',
+                  '**Reporter @' + issueAuthor + ' will be credited when fixed.**',
+                  '',
+                  '---',
+                  '*🤖 NullSec Auto-Fix Bot*'
+                ].join('\n')
+              });
+              
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  labels: ['confirmed', 'credit-reporter']
+                });
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  name: 'needs-info'
+                });
+              } catch (e) {}
+            }
+            
+            // /wontfix - Close as won't fix
+            if (comment.startsWith('/wontfix')) {
+              const reason = comment.replace('/wontfix', '').trim() || 'Not applicable to current scope';
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                body: [
+                  '## 🚫 Closed: Won\'t Fix',
+                  '',
+                  '**Reason:** ' + reason,
+                  '',
+                  'Thanks @' + issueAuthor + ' for reporting. Feel free to open a new issue if circumstances change.',
+                  '',
+                  '---',
+                  '*🤖 NullSec Auto-Fix Bot*'
+                ].join('\n')
+              });
+              
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                state: 'closed',
+                state_reason: 'not_planned'
+              });
+            }
+            
+            // /duplicate #<number> - Mark as duplicate
+            if (comment.startsWith('/duplicate')) {
+              const dupMatch = comment.match(/\/duplicate\s+#?(\d+)/);
+              if (dupMatch) {
+                const dupNumber = dupMatch[1];
+                
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  body: [
+                    '## 🔄 Duplicate Issue',
+                    '',
+                    'This issue is a duplicate of #' + dupNumber,
+                    '',
+                    'Please follow that issue for updates.',
+                    '',
+                    '---',
+                    '*🤖 NullSec Auto-Fix Bot*'
+                  ].join('\n')
+                });
+                
+                try {
+                  await github.rest.issues.addLabels({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issueNumber,
+                    labels: ['duplicate']
+                  });
+                } catch (e) {}
+                
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  state: 'closed',
+                  state_reason: 'not_planned'
+                });
+              }
+            }
+            
+            // /priority <high|medium|low> - Set priority
+            if (comment.startsWith('/priority')) {
+              const prioMatch = comment.match(/\/priority\s+(high|medium|low)/i);
+              if (prioMatch) {
+                const priority = prioMatch[1].toLowerCase();
+                const prioLabels = {
+                  'high': 'priority-high',
+                  'medium': 'priority-medium',
+                  'low': 'priority-low'
+                };
+                
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  body: '🏷️ Priority set to **' + priority.toUpperCase() + '**\n\n---\n*🤖 NullSec Auto-Fix Bot*'
+                });
+                
+                try {
+                  await github.rest.issues.addLabels({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issueNumber,
+                    labels: [prioLabels[priority]]
+                  });
+                } catch (e) {}
+              }
+            }
+            
+            // /credit - Manually credit reporter
+            if (comment.startsWith('/credit')) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                body: [
+                  '## 🏆 Contributor Credit',
+                  '',
+                  '**@' + issueAuthor + '** has been credited for this contribution!',
+                  '',
+                  'Thanks for helping improve NullSec! 🙏',
+                  '',
+                  '---',
+                  '*🤖 NullSec Auto-Fix Bot*'
+                ].join('\n')
+              });
+              
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  labels: ['credited']
+                });
+              } catch (e) {}
+            }
