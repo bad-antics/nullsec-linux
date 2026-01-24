@@ -444,3 +444,25 @@ NullSec Public License v1.0 — For authorized security testing and education on
 [![Website](https://img.shields.io/badge/Downloads-bad--antics.github.io-ff0040?style=for-the-badge&logo=firefox&logoColor=white)](https://bad-antics.github.io)
 
 </div>
+
+---
+
+## ⭐ Support the Project
+
+If you find NullSec Linux useful, please consider:
+
+- **⭐ Star this repository** — helps others discover it!
+- **🍴 Fork it** — contribute improvements
+- **📢 Share it** — tell your security community
+- **💬 Join Discord** — [discord.gg/killers](https://discord.gg/killers)
+
+### Related Projects (⭐ Star them too!)
+
+| Project | Description |
+|---------|-------------|
+| ⭐ [nullsec-webfuzz](https://github.com/bad-antics/nullsec-webfuzz) | High-performance web fuzzer in Rust |
+| ⭐ [blackflag-ecu](https://github.com/bad-antics/blackflag-ecu) | Professional ECU diagnostics & tuning |
+| ⭐ [nullkia](https://github.com/bad-antics/nullkia) | Mobile security framework |
+| ⭐ [mysterymachine](https://github.com/bad-antics/mysterymachine) | AI-powered recon & exploitation |
+| ⭐ [ai-entropy-mapper](https://github.com/bad-antics/ai-entropy-mapper) | Neural network entropy analysis |
+
