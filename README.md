@@ -466,3 +466,20 @@ If you find NullSec Linux useful, please consider:
 | ⭐ [mysterymachine](https://github.com/bad-antics/mysterymachine) | AI-powered recon & exploitation |
 | ⭐ [ai-entropy-mapper](https://github.com/bad-antics/ai-entropy-mapper) | Neural network entropy analysis |
 
+
+## 🎯 Version 5.0 Highlights
+
+- **New AI/ML Security Edition** - Tools for LLM red teaming, prompt injection testing
+- **Hardware Hacking Edition** - SDR, RFID, glitch attacks, JTAG tools
+- **Automotive Edition** - CAN bus, OBD-II, UDS protocol tools
+- **Apple Silicon Support** - Native Asahi Linux builds
+- **RISC-V Support** - For emerging hardware platforms
+
+## 🔒 Security Features
+
+- Full disk encryption by default
+- AppArmor/SELinux profiles for all tools
+- Hardened kernel configurations
+- Secure boot support
+- TPM integration
+
