@@ -8,7 +8,7 @@
 
 [![License: NPL](https://img.shields.io/badge/License-NullSec%20Public-red.svg?style=for-the-badge)](LICENSE)
 [![Base](https://img.shields.io/badge/Base-Debian%2013-blue.svg?style=for-the-badge)](https://github.com/bad-antics/nullsec-linux)
-[![Tools](https://img.shields.io/badge/Security%20Tools-135+-green.svg?style=for-the-badge)](https://github.com/bad-antics/nullsec-linux)
+[![Tools](https://img.shields.io/badge/Security%20Tools-136+-green.svg?style=for-the-badge)](https://github.com/bad-antics/nullsec-linux)
 [![Version](https://img.shields.io/badge/Version-5.0-purple.svg?style=for-the-badge)](https://github.com/bad-antics/nullsec-linux)
 [![GitHub](https://img.shields.io/badge/GitHub-bad--antics-181717?style=for-the-badge&logo=github)](https://github.com/bad-antics)
 [![Discord](https://img.shields.io/badge/Discord-killers-5865F2?style=for-the-badge&logo=discord)](https://discord.gg/killers)
@@ -31,7 +31,7 @@
 
 ## 🆕 What's New in v5.0
 
-- **135+ Security Tools** — 25 new tools added
+- **136+ Security Tools** — 25 new tools added
 - **NullKia v3.0 Integrated** — Mobile security framework built-in
 - **AI/ML Security Suite** — LLM red teaming, ML model analysis
 - **Cloud Pentesting Edition** — AWS/GCP/Azure/Kubernetes tools
@@ -185,6 +185,7 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 | [nullsec-phish](https://github.com/bad-antics/nullsec-phish) | Python | Phishing framework |
 | [nullsec-webfuzz](https://github.com/bad-antics/nullsec-webfuzz) | Rust | Web application fuzzer |
 | [nullsec-sqlinject](https://github.com/bad-antics/nullsec-sqlinject) | Python | SQL injection toolkit |
+| [glowbarn](https://github.com/bad-antics/glowbarn-rs) | Rust | Security console & resource monitoring |
 
 ### Network Security
 
