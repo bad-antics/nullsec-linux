@@ -60,7 +60,6 @@ https://github.com/bad-antics/nullsec-wiki
 
 ## Forum/Support
 https://github.com/bad-antics/nullsec-linux/discussions
-https://discord.gg/killers
 
 ## Bug Tracker
 https://github.com/bad-antics/nullsec-linux/issues
@@ -79,7 +78,7 @@ MIT License (distribution), GPL/MIT/Apache (individual tools)
 - Pentoo
 
 ## Contact Email
-nullsec@proton.me
+security@nullsec-linux.org
 
 ## Donation
 https://github.com/sponsors/bad-antics

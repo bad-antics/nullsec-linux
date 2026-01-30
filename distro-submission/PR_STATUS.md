@@ -37,7 +37,6 @@ When responding to reviewer questions, emphasize:
 4. **Architecture Support**: AMD64, ARM64, RISC-V, Apple Silicon
 5. **Active Development**: Regular commits, responsive maintainer
 6. **Documentation**: Wiki, installation guide, tool documentation
-7. **Community**: Discord server (discord.gg/killers)
 
 ---
 

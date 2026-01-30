@@ -23,7 +23,7 @@
 - OSDN: Within 48 hours
 
 ## Becoming a Mirror
-Contact: nullsec@proton.me
+Contact: security@nullsec-linux.org
 
 ## Verify Downloads
 Always verify checksums:

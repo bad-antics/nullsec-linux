@@ -176,7 +176,6 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 ## Community
 
-- **Discord**: [discord.gg/killers](https://discord.gg/killers)
 - **GitHub Discussions**: For questions and ideas
 - **Issues**: For bugs and features
 

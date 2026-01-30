@@ -91,7 +91,6 @@ Or perform a fresh installation (recommended for major version upgrades).
 ## Support
 
 - **GitHub Issues:** https://github.com/bad-antics/nullsec-linux/issues
-- **Discord:** https://discord.gg/killers
 - **Wiki:** https://github.com/bad-antics/nullsec-wiki
 
 ## Acknowledgments

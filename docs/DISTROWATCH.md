@@ -65,7 +65,6 @@ NullSec Linux is a security-focused Linux distribution based on Debian 13 (Trixi
 - **Maintainer**: bad-antics
 - **Website**: https://bad-antics.github.io
 - **GitHub**: https://github.com/bad-antics
-- **Discord**: https://discord.gg/killers
 - **Issues**: https://github.com/bad-antics/nullsec-linux/issues
 
 ## Screenshots
