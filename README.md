@@ -11,7 +11,6 @@
 [![Tools](https://img.shields.io/badge/Security%20Tools-135+-green.svg?style=for-the-badge)](https://github.com/bad-antics/nullsec-linux)
 [![Version](https://img.shields.io/badge/Version-5.0-purple.svg?style=for-the-badge)](https://github.com/bad-antics/nullsec-linux)
 [![GitHub](https://img.shields.io/badge/GitHub-bad--antics-181717?style=for-the-badge&logo=github)](https://github.com/bad-antics)
-[![Discord](https://img.shields.io/badge/Discord-killers-5865F2?style=for-the-badge&logo=discord)](https://discord.gg/killers)
 
 ```
     _   __      ____  _____              __    _                  
@@ -23,7 +22,6 @@
        [ bad-antics development | Security Distribution v5.0 ]
 ```
 
-### 🔑 **[Join discord.gg/killers](https://discord.gg/killers)** for premium tools & support!
 
 </div>
 
@@ -440,7 +438,6 @@ NullSec Public License v1.0 — For authorized security testing and education on
 ### 🌐 **[Download Portal: bad-antics.github.io](https://bad-antics.github.io)**
 
 [![GitHub](https://img.shields.io/badge/GitHub-bad--antics-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/bad-antics)
-[![Discord](https://img.shields.io/badge/Discord-killers-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/killers)
 [![Website](https://img.shields.io/badge/Downloads-bad--antics.github.io-ff0040?style=for-the-badge&logo=firefox&logoColor=white)](https://bad-antics.github.io)
 
 </div>
@@ -454,7 +451,6 @@ If you find NullSec Linux useful, please consider:
 - **⭐ Star this repository** — helps others discover it!
 - **🍴 Fork it** — contribute improvements
 - **📢 Share it** — tell your security community
-- **💬 Join Discord** — [discord.gg/killers](https://discord.gg/killers)
 
 ### Related Projects (⭐ Star them too!)
 
