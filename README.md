@@ -8,7 +8,7 @@
 
 [![License: NPL](https://img.shields.io/badge/License-NullSec%20Public-red.svg?style=for-the-badge)](LICENSE)
 [![Base](https://img.shields.io/badge/Base-Debian%2013-blue.svg?style=for-the-badge)](https://github.com/bad-antics/nullsec-linux)
-[![Tools](https://img.shields.io/badge/Security%20Tools-135+-green.svg?style=for-the-badge)](https://github.com/bad-antics/nullsec-linux)
+[![Tools](https://img.shields.io/badge/Security%20Tools-140+-green.svg?style=for-the-badge)](https://github.com/bad-antics/nullsec-linux)
 [![Version](https://img.shields.io/badge/Version-5.0-purple.svg?style=for-the-badge)](https://github.com/bad-antics/nullsec-linux)
 [![GitHub](https://img.shields.io/badge/GitHub-bad--antics-181717?style=for-the-badge&logo=github)](https://github.com/bad-antics)
 
@@ -29,7 +29,7 @@
 
 ## 🆕 What's New in v5.0
 
-- **135+ Security Tools** — 25 new tools added
+- **140+ Security Tools** — 25 new tools added
 - **NullKia v3.0 Integrated** — Mobile security framework built-in
 - **AI/ML Security Suite** — LLM red teaming, ML model analysis
 - **Cloud Pentesting Edition** — AWS/GCP/Azure/Kubernetes tools
@@ -75,7 +75,7 @@ Stripped, locked-down, production-ready images with enterprise-grade security.
 
 | Edition | Description | Size | Download |
 |---------|-------------|------|----------|
-| **Full** | Complete toolkit (135+ tools) | 5.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-full-5.0-amd64.iso) |
+| **Full** | Complete toolkit (140+ tools) | 5.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-full-5.0-amd64.iso) |
 | **Lite** | Essential tools only | 2.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-lite-5.0-amd64.iso) |
 | **NetInstall** | Minimal, downloads during install | 520 MB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-netinst-5.0-amd64.iso) |
 
@@ -460,6 +460,10 @@ If you find NullSec Linux useful, please consider:
 | ⭐ [blackflag-ecu](https://github.com/bad-antics/blackflag-ecu) | Professional ECU diagnostics & tuning |
 | ⭐ [nullkia](https://github.com/bad-antics/nullkia) | Mobile security framework |
 | ⭐ [mysterymachine](https://github.com/bad-antics/mysterymachine) | AI-powered recon & exploitation |
+| ⭐ [n01d-forge](https://github.com/bad-antics/n01d-forge) | Rust/egui image burner with LUKS/VeraCrypt encryption |
+| ⭐ [n01d-machine](https://github.com/bad-antics/n01d-machine) | Secure VM manager with Tor/VPN isolation |
+| ⭐ [glowbarn-os](https://github.com/bad-antics/glowbarn-os) | IoT security firmware framework |
+| ⭐ [mirage](https://github.com/bad-antics/mirage) | ML model security testing |
 | ⭐ [ai-entropy-mapper](https://github.com/bad-antics/ai-entropy-mapper) | Neural network entropy analysis |
 
 
