@@ -35,7 +35,7 @@
 - **Cloud Pentesting Edition** — AWS/GCP/Azure/Kubernetes tools
 - **Hardware Hacking Edition** — SDR, RFID, embedded systems
 - **Automotive Security** — CAN bus, OBD-II, vehicle pentesting
-- **Kernel 6.8 LTS** — Latest security patches
+- **Custom Kernel 6.17.13** — Built from source with NullSec identity, zero upstream branding
 - **Wayland + Hyprland** — Modern compositor option
 - **ARM64 Native** — Full Apple Silicon & Raspberry Pi 5 support
 
@@ -144,6 +144,21 @@ gpg --verify SHA256SUMS.sig SHA256SUMS
 - KFENCE memory safety
 - io_uring restrictions
 - BPF hardening
+
+### Custom Kernel Build
+NullSec Linux ships with a **custom-compiled kernel** built from upstream kernel.org sources.
+No Parrot, Debian, or Ubuntu branding remains — `uname`, `/proc/version`, and all build
+identity strings are NullSec-native.
+
+| Property | Value |
+|:---------|:------|
+| Version | `6.17.13+2-amd64` |
+| Source | kernel.org vanilla |
+| Build ID | `nullsec@nullsec.sh` |
+| `/proc/version` | `NullSec 6.17.13-1nullsec1` |
+
+See [`kernel/`](kernel/) for build scripts, configs, and documentation.
+Download pre-built `.deb` packages from [Releases](https://github.com/bad-antics/nullsec-linux/releases).
 
 ### Binary Protection
 - PIE, Full RELRO, Stack canaries
@@ -396,7 +411,7 @@ nullkia --gui
 - AI/ML security suite (LLM red teaming)
 - Hardware hacking edition (SDR/RFID/IoT)
 - Automotive security tools (CAN bus)
-- Kernel 6.8 LTS
+- Custom Kernel 6.17.13 (built from source, NullSec-branded)
 - Wayland + Hyprland compositor
 - Full ARM64/Apple Silicon support
 - Enhanced isolation (Landlock, CFI)
