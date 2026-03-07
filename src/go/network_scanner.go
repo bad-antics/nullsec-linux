@@ -2,7 +2,7 @@
  * ═══════════════════════════════════════════════════════════════════
  *  NULLSEC LINUX GO NETWORK SCANNER
  *  Advanced port scanning and network reconnaissance
- *  @author bad-antics | discord.gg/killers
+ *  @author bad-antics | twitter @anonantics
  * ═══════════════════════════════════════════════════════════════════
  */
 
@@ -26,7 +26,7 @@ import (
 const (
 	VERSION = "2.0.0"
 	AUTHOR  = "bad-antics"
-	DISCORD = "discord.gg/killers"
+	DISCORD = "twitter @anonantics"
 )
 
 const BANNER = `

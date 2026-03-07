@@ -131,7 +131,7 @@ See SHA256SUMS and MD5SUMS files for verification.
 ## Support
 
 - GitHub: https://github.com/bad-antics/nullsec-linux/issues
-- Discord: https://discord.gg/killers
+- Discord: https://twitter.com/anonantics
 - Wiki: https://github.com/bad-antics/nullsec-wiki
 NOTES
 

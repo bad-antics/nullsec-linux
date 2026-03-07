@@ -2,7 +2,7 @@
  * ═══════════════════════════════════════════════════════════════════
  *  NULLSEC LINUX C PROCESS INJECTOR
  *  Low-level process manipulation and injection
- *  @author bad-antics | discord.gg/killers
+ *  @author bad-antics | twitter @anonantics
  * ═══════════════════════════════════════════════════════════════════
  */
 
@@ -24,7 +24,7 @@
 
 #define VERSION "2.0.0"
 #define AUTHOR "bad-antics"
-#define DISCORD "discord.gg/killers"
+#define DISCORD "twitter @anonantics"
 
 #define COLOR_RESET   "\x1b[0m"
 #define COLOR_RED     "\x1b[31m"

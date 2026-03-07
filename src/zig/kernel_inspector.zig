@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════════════
 //  NULLSEC LINUX ZIG KERNEL INSPECTOR
 //  Low-level Linux kernel analysis and inspection
-//  @author bad-antics | discord.gg/killers
+//  @author bad-antics | twitter @anonantics
 // ═══════════════════════════════════════════════════════════════════
 
 const std = @import("std");
@@ -11,7 +11,7 @@ const fmt = std.fmt;
 
 const VERSION = "2.0.0";
 const AUTHOR = "bad-antics";
-const DISCORD = "discord.gg/killers";
+const DISCORD = "twitter @anonantics";
 
 const BANNER =
     \\

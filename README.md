@@ -405,7 +405,7 @@ nullkia --gui
 ## 📋 Changelog
 
 ### v5.0.0 (January 2026)
-- **135+ tools** (25 new)
+- **140+ tools** (25 new)
 - NullKia v3.0 integrated
 - Cloud pentesting edition (AWS/GCP/Azure/K8s)
 - AI/ML security suite (LLM red teaming)

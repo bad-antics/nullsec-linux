@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════════════
 //  NULLSEC LINUX RUST SYSTEM MONITOR
 //  High-performance system monitoring and analysis
-//  @author bad-antics | discord.gg/killers
+//  @author bad-antics | twitter @anonantics
 // ═══════════════════════════════════════════════════════════════════
 
 use std::collections::HashMap;
@@ -14,7 +14,7 @@ use std::time::{Duration, Instant};
 
 const VERSION: &str = "2.0.0";
 const AUTHOR: &str = "bad-antics";
-const DISCORD: &str = "discord.gg/killers";
+const DISCORD: &str = "twitter @anonantics";
 
 const BANNER: &str = r#"
 ╭──────────────────────────────────────────╮

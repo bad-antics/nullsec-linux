@@ -3,7 +3,7 @@
 # ═══════════════════════════════════════════════════════════════════
 #  NULLSEC Linux Process Hollowing Detector
 #  Detect process injection and hollowing techniques
-#  @author bad-antics | discord.gg/killers
+#  @author bad-antics | twitter @anonantics
 # ═══════════════════════════════════════════════════════════════════
 
 require 'fileutils'
@@ -12,7 +12,7 @@ require 'json'
 
 VERSION = '2.0.0'
 AUTHOR = 'bad-antics'
-DISCORD = 'discord.gg/killers'
+DISCORD = 'twitter @anonantics'
 
 BANNER = <<~BANNER
   ╭──────────────────────────────────────────╮

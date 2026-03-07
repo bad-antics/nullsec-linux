@@ -8,7 +8,7 @@
 #                                                                  
 # NullSec Linux Toolkit Installer
 # https://github.com/bad-antics/nullsec-linux
-# discord.gg/killers
+# twitter @anonantics
 #
 
 set -e
@@ -34,7 +34,7 @@ banner() {
     echo '/_/ |_/\__,_/_/_/  /____/\___/\___/  /_____/_/_/ /_/\__,_/_/|_|  '
     echo -e "${NC}"
     echo -e "${CYAN}    [ NullSec Linux Toolkit Installer v${VERSION} ]${NC}"
-    echo -e "${YELLOW}    [ discord.gg/killers for support ]${NC}"
+    echo -e "${YELLOW}    [ twitter @anonantics for support ]${NC}"
     echo
 }
 
@@ -311,7 +311,7 @@ case "$1" in
         echo "  anon      Anonymity tools"
         echo "  version   Show version"
         echo
-        echo "Join discord.gg/killers for support!"
+        echo "Join twitter @anonantics for support!"
         ;;
     *)
         echo "Unknown command: $1"
@@ -358,7 +358,7 @@ print_success() {
     echo "    nullsec harden --profile maximum"
     echo "    nullsec anon --tor --mac-spoof"
     echo
-    echo -e "${YELLOW}Join discord.gg/killers for premium tools!${NC}"
+    echo -e "${YELLOW}Join twitter @anonantics for premium tools!${NC}"
     echo
 }
 
