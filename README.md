@@ -43,21 +43,51 @@
 
 ## 📥 Official Downloads
 
-### 🌐 Download Portal: **[bad-antics.github.io](https://bad-antics.github.io)**
+<div align="center">
+
+### 🔄 Downloads Returning Soon
+
+**We're migrating to faster, more reliable hosting on [lateralus.dev](https://lateralus.dev)**
+
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║                                                                   ║
+║   ⚡ DOWNLOADS TEMPORARILY UNAVAILABLE ⚡                         ║
+║                                                                   ║
+║   NullSec Linux v5.0 ISOs are being migrated to new hosting      ║
+║   infrastructure powered by lateralus.dev for improved:         ║
+║                                                                   ║
+║   • ✅ Faster global CDN delivery                                 ║
+║   • ✅ Better uptime & reliability                                ║
+║   • ✅ Torrent/magnet support                                     ║
+║   • ✅ Integrated with bad-antics ecosystem                       ║
+║                                                                   ║
+║   📅 Expected: Coming Soon                                        ║
+║   📬 Watch this repo or follow @bad_antics for updates           ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+```
+
+**In the meantime:**
+- 🔧 [Build from source](docs/Development.md) if you need immediate access
+- ⭐ Star & watch this repo for release notifications
+- 💬 [Open an issue](https://github.com/bad-antics/nullsec-linux/issues) if you have questions
+
+</div>
 
 ---
 
-## 💎 Premium Editions
+## 💎 Premium Editions (Coming Soon)
 
 Stripped, locked-down, production-ready images with enterprise-grade security.
 
-| Edition | Description | Size | Download |
-|---------|-------------|------|----------|
-| **NullSec Pro — Full** | Complete secure system | 3.6 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-pro-5.0-amd64.iso) |
-| **NullSec Pro — USB** | Bootable USB with encrypted persistence | 4.5 GB | [IMG](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-pro-usb-5.0-amd64.img) |
-| **NullSec Pro — Minimal** | CLI-only, minimal attack surface | 980 MB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-pro-minimal-5.0-amd64.iso) |
-| **NullSec Pro — Cloud** | AWS/GCP/Azure/K8s optimized | 2.0 GB | [OVA/AMI](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-pro-cloud-5.0.tar.gz) |
-| **NullSec Pro — Hardware** | SDR/RFID/Embedded tools | 4.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-pro-hardware-5.0-amd64.iso) |
+| Edition | Description | Size | Status |
+|---------|-------------|------|--------|
+| **NullSec Pro — Full** | Complete secure system | 3.6 GB | 🔄 Migrating |
+| **NullSec Pro — USB** | Bootable USB with encrypted persistence | 4.5 GB | 🔄 Migrating |
+| **NullSec Pro — Minimal** | CLI-only, minimal attack surface | 980 MB | 🔄 Migrating |
+| **NullSec Pro — Cloud** | AWS/GCP/Azure/K8s optimized | 2.0 GB | 🔄 Migrating |
+| **NullSec Pro — Hardware** | SDR/RFID/Embedded tools | 4.8 GB | 🔄 Migrating |
 
 ### Premium Features:
 - ✅ Kernel lockdown (KSPP, grsecurity principles)
@@ -71,49 +101,49 @@ Stripped, locked-down, production-ready images with enterprise-grade security.
 
 ---
 
-## 🐧 Standard Editions
+## 🐧 Standard Editions (Coming Soon)
 
-| Edition | Description | Size | Download |
-|---------|-------------|------|----------|
-| **Full** | Complete toolkit (140+ tools) | 5.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-full-5.0-amd64.iso) |
-| **Lite** | Essential tools only | 2.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-lite-5.0-amd64.iso) |
-| **NetInstall** | Minimal, downloads during install | 520 MB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-netinst-5.0-amd64.iso) |
+| Edition | Description | Size | Status |
+|---------|-------------|------|--------|
+| **Full** | Complete toolkit (140+ tools) | 5.8 GB | 🔄 Migrating |
+| **Lite** | Essential tools only | 2.8 GB | 🔄 Migrating |
+| **NetInstall** | Minimal, downloads during install | 520 MB | 🔄 Migrating |
 
 ---
 
-## ⚡ Live Boot Images
+## ⚡ Live Boot Images (Coming Soon)
 
 Boot directly without installation — leaves no trace on host system.
 
-| Edition | Description | Size | Download |
-|---------|-------------|------|----------|
-| **Live Standard** | Full toolkit in RAM | 4.0 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-live-5.0-amd64.iso) |
-| **Live Stealth** | Anti-forensics, RAM-only | 3.2 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-live-stealth-5.0-amd64.iso) |
-| **Live Forensics** | DFIR focused, read-only mounts | 4.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-live-forensics-5.0-amd64.iso) |
-| **Live Air-Gapped** | No network stack, offline only | 2.4 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-live-airgap-5.0-amd64.iso) |
+| Edition | Description | Size | Status |
+|---------|-------------|------|--------|
+| **Live Standard** | Full toolkit in RAM | 4.0 GB | 🔄 Migrating |
+| **Live Stealth** | Anti-forensics, RAM-only | 3.2 GB | 🔄 Migrating |
+| **Live Forensics** | DFIR focused, read-only mounts | 4.8 GB | 🔄 Migrating |
+| **Live Air-Gapped** | No network stack, offline only | 2.4 GB | 🔄 Migrating |
 
 ---
 
-## 🎯 Specialized Editions (NEW in v5.0)
+## 🎯 Specialized Editions (Coming Soon)
 
-| Edition | Description | Size | Download |
-|---------|-------------|------|----------|
-| **Cloud Pentest** | AWS/GCP/Azure/K8s security | 3.5 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-cloud-5.0-amd64.iso) |
-| **Hardware Hacking** | SDR/RFID/Embedded/IoT | 4.2 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-hardware-5.0-amd64.iso) |
-| **AI/ML Security** | LLM red team, model analysis | 6.5 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-ai-5.0-amd64.iso) |
-| **Automotive** | CAN bus, OBD-II, vehicle sec | 3.8 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-auto-5.0-amd64.iso) |
-| **Mobile Security** | NullKia + Android/iOS tools | 4.0 GB | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-mobile-5.0-amd64.iso) |
+| Edition | Description | Size | Status |
+|---------|-------------|------|--------|
+| **Cloud Pentest** | AWS/GCP/Azure/K8s security | 3.5 GB | 🔄 Migrating |
+| **Hardware Hacking** | SDR/RFID/Embedded/IoT | 4.2 GB | 🔄 Migrating |
+| **AI/ML Security** | LLM red team, model analysis | 6.5 GB | 🔄 Migrating |
+| **Automotive** | CAN bus, OBD-II, vehicle sec | 3.8 GB | 🔄 Migrating |
+| **Mobile Security** | NullKia + Android/iOS tools | 4.0 GB | 🔄 Migrating |
 
 ---
 
-## 🖥️ Architecture Support
+## 🖥️ Architecture Support (Coming Soon)
 
-| Architecture | Description | Download |
-|--------------|-------------|----------|
-| **AMD64/x86_64** | Standard 64-bit PCs | All editions above |
-| **ARM64/aarch64** | Raspberry Pi 4/5, ARM servers | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-5.0-arm64.iso) |
-| **RISC-V** | StarFive VisionFive 2 | [ISO](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-5.0-riscv64.iso) |
-| **Apple Silicon** | M1/M2/M3/M4 native | [IMG](https://github.com/bad-antics/nullsec-linux/releases/download/v5.0/nullsec-5.0-asahi.img) |
+| Architecture | Description | Status |
+|--------------|-------------|--------|
+| **AMD64/x86_64** | Standard 64-bit PCs | 🔄 Migrating |
+| **ARM64/aarch64** | Raspberry Pi 4/5, ARM servers | 🔄 Migrating |
+| **RISC-V** | StarFive VisionFive 2 | 🔄 Migrating |
+| **Apple Silicon** | M1/M2/M3/M4 native | 🔄 Migrating |
 
 ---
 
