@@ -49,24 +49,17 @@
 
 **We're migrating to faster, more reliable hosting on [lateralus.dev](https://lateralus.dev)**
 
-```
-╔═══════════════════════════════════════════════════════════════════╗
-║                                                                   ║
-║   ⚡ DOWNLOADS TEMPORARILY UNAVAILABLE ⚡                         ║
-║                                                                   ║
-║   NullSec Linux v5.0 ISOs are being migrated to new hosting      ║
-║   infrastructure powered by lateralus.dev for improved:         ║
-║                                                                   ║
-║   • ✅ Faster global CDN delivery                                 ║
-║   • ✅ Better uptime & reliability                                ║
-║   • ✅ Torrent/magnet support                                     ║
-║   • ✅ Integrated with bad-antics ecosystem                       ║
-║                                                                   ║
-║   📅 Expected: Coming Soon                                        ║
-║   📬 Watch this repo or follow @bad_antics for updates           ║
-║                                                                   ║
-╚═══════════════════════════════════════════════════════════════════╝
-```
+⚡ **DOWNLOADS TEMPORARILY UNAVAILABLE** ⚡
+
+NullSec Linux v5.0 ISOs are being migrated to new hosting infrastructure powered by lateralus.dev for improved:
+
+- ✅ Faster global CDN delivery
+- ✅ Better uptime & reliability
+- ✅ Torrent/magnet support
+- ✅ Integrated with bad-antics ecosystem
+
+📅 **Expected:** Coming Soon  
+📬 Watch this repo or follow @bad_antics for updates
 
 **In the meantime:**
 - 🔧 [Build from source](docs/Development.md) if you need immediate access
@@ -495,7 +488,7 @@ If you find NullSec Linux useful, please consider:
 
 - **⭐ Star this repository** — helps others discover it!
 - **🍴 Fork it** — contribute improvements
-- **📢 Share it** — tell your security community
+- **�� Share it** — tell your security community
 
 ### Related Projects (⭐ Star them too!)
 
@@ -527,84 +520,3 @@ If you find NullSec Linux useful, please consider:
 - Hardened kernel configurations
 - Secure boot support
 - TPM integration
-
-
-<!-- Updated: 2026-01-25 13:02:47 -->
-
-<!-- Updated: 2026-01-25 13:52:21 -->
-
-<!-- Updated: 2026-01-25 14:00:03 -->
-
-<!-- Updated: 2026-01-26 14:00:01 -->
-
-<!-- Updated: 2026-01-26 18:00:13 -->
-
-<!-- Updated: 2026-01-27 14:00:01 -->
-
-<!-- Updated: 2026-01-31 12:44:38 -->
-
-<!-- Updated: 2026-01-31 12:44:38 -->
-
-<!-- Updated: 2026-01-31 14:00:01 -->
-
-<!-- Updated: 2026-02-01 14:00:01 -->
-
-<!-- Updated: 2026-02-13 14:00:01 -->
-
-<!-- Updated: 2026-02-13 18:00:09 -->
-
-<!-- Updated: 2026-02-13 18:00:10 -->
-
-<!-- Updated: 2026-02-14 14:00:01 -->
-
-<!-- Updated: 2026-02-15 18:00:07 -->
-
-<!-- Updated: 2026-02-16 14:00:01 -->
-
-<!-- Updated: 2026-02-17 18:00:11 -->
-
-<!-- Updated: 2026-02-19 18:00:12 -->
-
-<!-- Updated: 2026-02-22 14:47:24 -->
-
-<!-- Updated: 2026-02-24 18:00:06 -->
-
-<!-- Updated: 2026-02-26 14:00:01 -->
-
-<!-- Updated: 2026-02-26 18:00:08 -->
-
-<!-- Updated: 2026-02-27 18:00:19 -->
-
-<!-- Updated: 2026-03-03 14:00:01 -->
-
-<!-- Updated: 2026-03-03 14:00:02 -->
-
-<!-- Updated: 2026-03-05 18:00:08 -->
-
-<!-- Updated: 2026-03-07 14:00:01 -->
-
-<!-- Updated: 2026-03-08 18:00:13 -->
-
-<!-- Updated: 2026-03-09 14:00:01 -->
-
-<!-- Updated: 2026-03-10 14:00:01 -->
-
-<!-- Updated: 2026-03-10 18:00:08 -->
-
-<!-- Updated: 2026-03-13 14:00:01 -->
-
-<!-- Updated: 2026-03-18 14:00:01 -->
-
-<!-- Updated: 2026-03-21 18:00:09 -->
-
-<!-- Updated: 2026-03-23 14:00:01 -->
-
-<!-- Updated: 2026-03-27 14:00:01 -->
-
-<!-- Updated: 2026-04-05 14:00:01 -->
-
-<!-- Updated: 2026-04-06 18:00:10 -->
-
-<!-- Updated: 2026-04-07 18:00:10 -->
-
-<!-- Updated: 2026-04-08 18:00:14 -->
