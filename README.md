@@ -501,3 +501,5 @@ If you find NullSec Linux useful, please consider:
 - TPM integration
 
 <!-- Updated: 2026-04-11 18:00:07 -->
+
+<!-- Updated: 2026-04-12 14:00:01 -->
