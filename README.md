@@ -499,3 +499,5 @@ If you find NullSec Linux useful, please consider:
 - Hardened kernel configurations
 - Secure boot support
 - TPM integration
+
+<!-- Updated: 2026-04-11 18:00:07 -->
