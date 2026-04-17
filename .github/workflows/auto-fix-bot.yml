@@ -16,7 +16,7 @@ jobs:
     if: |
       github.event_name == 'issues' && 
       github.event.action == 'opened' &&
-      (contains(github.event.issue.title, 'bug') || 
+      ((startsWith(github.event.issue.title, 'bug') || contains(github.event.issue.title, ' bug')) || 
        contains(github.event.issue.title, 'error') ||
        contains(github.event.issue.title, 'fix') ||
        contains(github.event.issue.title, 'broken'))
